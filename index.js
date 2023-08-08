@@ -1,16 +1,17 @@
-const knexConfig = require('./db/knexfile');
-const knex = require('knex')(knexConfig[process.env.NODE_ENV])
+require('dotenv').config();
+const cors = require('cors');
 const express = require('express');
-const bodyParser = require('body-parser');
 const app = express();
-const port = 8080;
-
-app.use(bodyParser.json());
+const { PORT, CORS_ORIGIN } = process.env;
+const port = process.env.PORT || 8080;
+app.use(cors({ origin: CORS_ORIGIN }));
+app.use(express.json());
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Listening at http://localhost:${PORT}`);
 });
