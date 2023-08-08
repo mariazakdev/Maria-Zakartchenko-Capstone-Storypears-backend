@@ -5,7 +5,7 @@ console.log('DB_CLIENT:', process.env.DB_CLIENT);
 
 module.exports = {
   development: {
-    client: 'mysql2',
+    client: 'mysql',
     connection: {
       host: process.env.DB_HOST,
       database: process.env.DB_NAME,
