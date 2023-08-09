@@ -1,13 +1,24 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const cors = require('cors');
+require('dotenv').config();
 const app = express();
-const port = 8080;
-app.use(bodyParser.json());
+const { PORT, CORS_ORIGIN } = process.env;
+const router = express.Router();
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+const storiesRoutes = require('./routes/storiesRoutes.js');
+const genresRoutes = require ('./routes/genresRoutes.js');
+const usersRoutes = require('./routes/usersRoutes.js');
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+// Middleware
+app.use(cors({ origin: CORS_ORIGIN }));
+app.use(express.json());
+app.use(express.static('public'));
+
+//Routes
+app.use('/stories', storiesRoutes);
+app.use('/genres' , genresRoutes);
+app.use('/users', usersRoutes );
+
+app.listen(PORT, () => {
+  console.log(`Listening at http://localhost:${PORT}`);
 });
