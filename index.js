@@ -7,6 +7,7 @@ const router = express.Router();
 
 const storiesRoutes = require('./routes/storiesRoutes.js');
 const genresRoutes = require ('./routes/genresRoutes.js');
+const usersRoutes = require('./routes/usersRoutes.js');
 
 // Middleware
 app.use(cors({ origin: CORS_ORIGIN }));
@@ -16,6 +17,7 @@ app.use(express.static('public'));
 //Routes
 app.use('/stories', storiesRoutes);
 app.use('/genres' , genresRoutes);
+app.use('/users', usersRoutes );
 
 app.listen(PORT, () => {
   console.log(`Listening at http://localhost:${PORT}`);
