@@ -1,13 +1,8 @@
-const knex = require("knex");
 const { v4: uuidv4 } = require("uuid");
+const knex = require('../db/db');
 
-exports.index = (req, res) => {
-  let { sort_by, order_by } = req.query;
-  sort_by = sort_by || "date";
-  order_by = order_by || "desc";
-
+exports.index = (req, res) =>{
   knex("stories")
-  .orderBy(sort_by, order_by)
     .then((data) => {
       res.status(200).json(data);
     })
@@ -24,14 +19,19 @@ exports.singleStory = (req, res) => {
       if (!data.length) {
         return res
           .status(404)
-          .send(`Record with id: ${req.params.id} is not found`);
+          .json({ error: `Record with id: ${req.params.id} is not found` });
       }
       res.status(200).json(data[0]);
     })
-    .catch((err) =>
-      res.status(400).send(`Error retrieving story ${req.params.id} ${err}`)
-    );
+    .catch((err) => {
+      console.error(`Error retrieving story ${req.params.id}:`, err);
+      res.status(500).json({ error: "Internal Server Error" });
+    });
 };
+
+
+
+
 
 // Validate the request body. Only user1 required.
 exports.createStory = (req, res) => {
@@ -44,7 +44,9 @@ exports.createStory = (req, res) => {
     !story ||
     genre_id === undefined
   ) {
-    return res.status(400).json({ error: "All fields are required" });
+    return res
+      .status(422)
+      .json({ error: "Unprocessable Entity: All fields are required" });
   }
   const newId = uuidv4();
   knex("stories")
@@ -62,7 +64,7 @@ exports.createStory = (req, res) => {
     })
     .catch((err) => {
       console.error("Error creating a story:", err);
-      res.status(500).send("Internal Server Error");
+      res.status(500).json({ error: "Internal Server Error" });
     });
 };
 

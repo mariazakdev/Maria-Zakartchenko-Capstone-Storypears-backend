@@ -3,8 +3,9 @@ const cors = require('cors');
 require('dotenv').config();
 const app = express();
 const { PORT, CORS_ORIGIN } = process.env;
+const router = express.Router();
 
-const storiesRoutes = require('./routes/storiesRoutes');
+const storiesRoutes = require('./routes/storiesRoutes.js');
 
 // Middleware
 app.use(cors({ origin: CORS_ORIGIN }));
