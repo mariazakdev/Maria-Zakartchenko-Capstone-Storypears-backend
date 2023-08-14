@@ -25,7 +25,7 @@ app.use('/users', usersRoutes );
 app.use('/prompts', promptsRoutes);
 app.use ('/emotions', emotionsRoutes);
 app.use('/links', linksRoutes);
-app.use('/feelings ', feelingsRoutes);
+app.use('/feelings', feelingsRoutes);
 
 
 
