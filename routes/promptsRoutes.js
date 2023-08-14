@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const promptsController = require('../controllers/promptsController');
+const promptsController = require('../controllers/promptsControllers');
 
 //Routes for prompt
 //Subject to change as site develops

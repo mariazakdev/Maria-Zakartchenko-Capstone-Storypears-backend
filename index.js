@@ -8,8 +8,9 @@ const router = express.Router();
 const storiesRoutes = require('./routes/storiesRoutes.js');
 const genresRoutes = require ('./routes/genresRoutes.js');
 const usersRoutes = require('./routes/usersRoutes.js');
-const promptsRoutes = require('/routes/promptsRoutes.js');
-const emotionsRoutes = require ('/routes/emotionsRoutes.js');
+const promptsRoutes = require('./routes/promptsRoutes.js');
+const emotionsRoutes = require ('./routes/emotionsRoutes.js');
+const linksRoutes = require('./routes/linksRoutes.js');
 
 // Middleware
 app.use(cors({ origin: CORS_ORIGIN }));
@@ -22,6 +23,10 @@ app.use('/genres' , genresRoutes);
 app.use('/users', usersRoutes );
 app.use('/prompts', promptsRoutes);
 app.use ('/emotions', emotionsRoutes);
+app.use('/links', linksRoutes);
+
+
+
 
 app.listen(PORT, () => {
   console.log(`Listening at http://localhost:${PORT}`);

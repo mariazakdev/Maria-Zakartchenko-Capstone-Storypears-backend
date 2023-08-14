@@ -6,6 +6,9 @@ module.exports = [
     { genre_id: '09008dce-3633-11ee-be56-0242ac120002', genre_name: 'Thriller' },
     { genre_id: '1e1fe9f2-3633-11ee-be56-0242ac120002', genre_name: 'Drama' },
     { genre_id: '33246760-3633-11ee-be56-0242ac120002', genre_name: 'Comedy' },
-    { genre_id: '51a65068-3633-11ee-be56-0242ac120002', genre_name: 'Horror' }
+    { genre_id: '51a65068-3633-11ee-be56-0242ac120002', genre_name: 'Horror' },
+    { genre_id: '55a2ec8c-3aaa-11ee-be56-0242ac120002', genre_name: 'Dystopain' },
+    { genre_id: '691ef5a8-3aaa-11ee-be56-0242ac120002', genre_name: 'Historical Fiction' },
+    { genre_id: '77465ba8-3aaa-11ee-be56-0242ac120002', genre_name: 'Western' }
   ];
   

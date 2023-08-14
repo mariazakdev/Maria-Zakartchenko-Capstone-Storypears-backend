@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const emotionsController = require('../controllers/emotionsController');
+const emotionsController = require('../controllers/emotionsControllers');
 
 router.get('/', emotionsController.index);
 router.get('/:id', emotionsController.singleEmotion);
