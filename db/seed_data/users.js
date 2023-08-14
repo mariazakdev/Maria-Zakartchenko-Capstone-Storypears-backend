@@ -1,5 +1,4 @@
 module.exports = [{
-    id: 'ea576a0a-3632-11ee-be56-0242ac120002',
     username: 'user1',
     password: 'password1',
     password2: 'password1',
@@ -8,11 +7,9 @@ module.exports = [{
     last_name: 'Doe',
     pen_first_name: 'Penelope',
     pen_last_name: 'Drake',
-    bio:"Poet with a heart full of emotions and a pen dipped in ink.",
-    links:'facebook.com'
+    bio:"Poet with a heart full of emotions and a pen dipped in ink."
   },
   {
-    id: 'f6afd2ce-3632-11ee-be56-0242ac120002',
     username: 'user2',
     password: 'password2',
     password2: 'password2',
@@ -21,11 +18,9 @@ module.exports = [{
     last_name: 'Smith',
     pen_first_name: 'Peter',
     pen_last_name: 'Johnson',
-    bio:"Novelist weaving tales of mystery and intrigue that keep readers on the edge of their seats.",
-    links:'facebook.com'
+    bio:"Novelist weaving tales of mystery and intrigue that keep readers on the edge of their seats."
   },
   {
-    id: 'ff9b5746-3632-11ee-be56-0242ac120002',
     username: 'user3',
     password: 'password3',
     password2: 'password3',
@@ -34,11 +29,9 @@ module.exports = [{
     last_name: 'Johnson',
     pen_first_name: 'Olivia',
     pen_last_name: 'Smith',
-    bio:"Wordsmith crafting eloquent prose that touches hearts and minds.",
-    links:'facebook.com'
+    bio:"Wordsmith crafting eloquent prose that touches hearts and minds."
   },
   {
-    id: '09008dce-3633-11ee-be56-0242ac120002',
     username: 'user4',
     password: 'password4',
     password2: 'password4',
@@ -47,11 +40,9 @@ module.exports = [{
     last_name: 'Brown',
     pen_first_name: 'Ethan',
     pen_last_name: 'Davis',
-    bio:"Author of children's books, bringing joy and laughter to young readers.",
-    links:'Facebook.com'
+    bio:"Author of children's books, bringing joy and laughter to young readers."
   },
   {
-    id: '1e1fe9f2-3633-11ee-be56-0242ac120002',
     username: 'user5',
     password: 'password5',
     password2: 'password5',
@@ -60,11 +51,9 @@ module.exports = [{
     last_name: 'Miller',
     pen_first_name: 'Sophia',
     pen_last_name: 'Clark',
-    bio:"Dedicated journalist on a mission to uncover the truth and share untold stories.",
-    links:'Facebook.com'
+    bio:"Dedicated journalist on a mission to uncover the truth and share untold stories."
   },
   {
-    id: '33246760-3633-11ee-be56-0242ac120002',
     username: 'user6',
     password: 'password6',
     password2: 'password6',
@@ -73,11 +62,9 @@ module.exports = [{
     last_name: 'Wilson',
     pen_first_name: 'Ava',
     pen_last_name: 'Rodriguez',
-    bio:"Romance writer creating tales of love that transport readers to far-off places.",
-    links:'Facebook.com'
+    bio:"Romance writer creating tales of love that transport readers to far-off places."
   },
   {
-    id: '42001db0-3633-11ee-be56-0242ac120002',
     username: 'user7',
     password: 'password7',
     password2: 'password7',
@@ -86,11 +73,9 @@ module.exports = [{
     last_name: 'Taylor',
     pen_first_name: 'Liam',
     pen_last_name: 'Martinez',
-    bio:"Scriptwriter for film and television, breathing life into unforgettable characters.",
-    links:'Facebook.com'
+    bio:"Scriptwriter for film and television, breathing life into unforgettable characters."
   },
   {
-    id: '42001db0-3633-11ee-be56-0242ac120007',
     username: 'user8',
     password: 'password8',
     password2: 'password8',
@@ -99,11 +84,9 @@ module.exports = [{
     last_name: 'Anderson',
     pen_first_name: 'Mia',
     pen_last_name: 'Martinez',
-    bio:"Passionate writer exploring the realms of fantasy and science fiction.",
-    links:'Facebook.com'
+    bio:"Passionate writer exploring the realms of fantasy and science fiction."
   },
   {
-    id: '51a65068-3633-11ee-be56-0242ac120002',
     username: 'user9',
     password: 'password9',
     password2: 'password9',
@@ -112,11 +95,9 @@ module.exports = [{
     last_name: 'Thomas',
     pen_first_name: 'Noah',
     pen_last_name: 'Wilson',
-    bio:"Literary explorer delving into the depths of human nature through thought-provoking essays.",
-    links:'Facebook.com'
+    bio:"Literary explorer delving into the depths of human nature through thought-provoking essays."
   },
   {
-    id: '5a4988b6-3633-11ee-be56-0242ac120002',
     username: 'user10',
     password: 'password10',
     password2: 'password10',
@@ -125,7 +106,6 @@ module.exports = [{
     last_name: 'Jackson',
     pen_first_name: 'Isabella',
     pen_last_name: 'Hall',
-    bio:"Blogger sharing insights, experiences, and musings on life's journey.",
-    links:'Facebook.com'
+    bio:"Blogger sharing insights, experiences, and musings on life's journey."
   }
 ];

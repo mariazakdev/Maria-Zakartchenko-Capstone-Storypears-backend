@@ -20,9 +20,6 @@ exports.up = async function(knex) {
     table.string('link', 255).nullable();
     table.timestamp('created_at').defaultTo(knex.fn.now());
     table.timestamp('updated_at').defaultTo(knex.fn.now());
-
-    table.checkConstraint('password2_matches_password', 'password2 = password');
-
     });
   }
 };
