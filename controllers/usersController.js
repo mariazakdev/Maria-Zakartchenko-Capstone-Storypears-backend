@@ -30,20 +30,29 @@ exports.getUserById = (req, res) => {
 };
 
 exports.createUser = (req, res) => {
-  const { username, email } = req.body;
-  if (!username || !email) {
-    return res.status(400).json({ error: 'Username and email are required' });
-  }
+  const { id, username, email, password, password2, first_name, last_name, pen_first_name, pen_last_name, bio } = req.body;
   
+  if (!username || !email || !password || !password2 || !pen_first_name) {
+    return res.status(400).json({ error: 'Username, password, and email are required' });
+  }
+
   const newId = uuidv4();
+  const userId = id || newId;
   knex('users')
     .insert({
-      id: newId,
+      id: userId,
       username,
       email,
+      password,
+      password2,
+      first_name,
+      last_name,
+      pen_first_name,
+      pen_last_name,
+      bio
     })
     .then(() => {
-      res.status(201).json({ success: true, id: newId });
+      res.status(201).json({ success: true });
     })
     .catch((err) => {
       console.error('Error creating a user:', err);
