@@ -11,6 +11,7 @@ const usersRoutes = require('./routes/usersRoutes.js');
 const promptsRoutes = require('./routes/promptsRoutes.js');
 const emotionsRoutes = require ('./routes/emotionsRoutes.js');
 const linksRoutes = require('./routes/linksRoutes.js');
+const feelingsRoutes = require('./routes/feelingsRoutes.js');
 
 // Middleware
 app.use(cors({ origin: CORS_ORIGIN }));
@@ -24,6 +25,7 @@ app.use('/users', usersRoutes );
 app.use('/prompts', promptsRoutes);
 app.use ('/emotions', emotionsRoutes);
 app.use('/links', linksRoutes);
+app.use('/feelings ', feelingsRoutes);
 
 
 
