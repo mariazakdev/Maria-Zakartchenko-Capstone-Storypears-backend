@@ -7,7 +7,7 @@ exports.index = (req, res) =>{
       res.status(200).json(data);
     })
     .catch((err) => {
-      console.error("Error retrieving stories:", err);
+      console.error("Error retrieving stories from API", err);
       res.status(500).send("Internal Server Error");
     });
 };
@@ -28,9 +28,6 @@ exports.singleStory = (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
     });
 };
-
-
-
 
 
 // Validate the request body. Only user1 required.
