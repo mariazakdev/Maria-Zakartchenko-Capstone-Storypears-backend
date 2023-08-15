@@ -1,6 +1,6 @@
 exports.up = function (knex) {
     return knex.schema.createTable('feelings', function (table) {
-      table.increments('id').primary();
+        table.uuid('id').primary().notNullable();
       table.text('sentence').notNullable(); 
     });
   };

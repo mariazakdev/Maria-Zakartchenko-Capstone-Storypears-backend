@@ -2,7 +2,7 @@ exports.up = async function(knex) {
   const tableExists = await knex.schema.hasTable('users');
   if (!tableExists) {
     return knex.schema.createTable('users', function(table) {
-      table.increments('id').primary();
+    table.increments('id').primary();
     table.string('username', 20).notNullable();
     table.binary('image').nullable(); 
     table.string('password', 20).notNullable();

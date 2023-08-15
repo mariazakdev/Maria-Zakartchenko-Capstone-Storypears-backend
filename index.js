@@ -12,6 +12,7 @@ const promptsRoutes = require('./routes/promptsRoutes.js');
 const emotionsRoutes = require ('./routes/emotionsRoutes.js');
 const linksRoutes = require('./routes/linksRoutes.js');
 const feelingsRoutes = require('./routes/feelingsRoutes.js');
+const halfStoryRoutes = require('./routes/halfStoryRoutes.js');
 
 // Middleware
 app.use(cors({ origin: CORS_ORIGIN }));
@@ -26,6 +27,7 @@ app.use('/prompts', promptsRoutes);
 app.use ('/emotions', emotionsRoutes);
 app.use('/links', linksRoutes);
 app.use('/feelings', feelingsRoutes);
+app.use('/halfstories', halfStoryRoutes);
 
 
 
