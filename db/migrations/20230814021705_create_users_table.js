@@ -2,7 +2,7 @@ exports.up = async function(knex) {
   const tableExists = await knex.schema.hasTable('users');
   if (!tableExists) {
     await knex.schema.createTable('users', function(table) {
-      table.increments('id').primary();
+      table.uuid('id').primary().notNullable();
       table.string('username', 20).notNullable();
       table.binary('image').nullable(); 
       table.string('password', 20).notNullable();
@@ -19,7 +19,7 @@ exports.up = async function(knex) {
   }
   // Table for user adding links to their profile
   await knex.schema.createTable('links', function(table) {
-    table.increments('id').primary();
+    table.uuid('id').primary();
     table.integer('user_id').unsigned().references('users.id').onDelete('CASCADE');
     table.string('link', 255).nullable();
     table.timestamp('created_at').defaultTo(knex.fn.now());

@@ -31,7 +31,7 @@ exports.getUserById = (req, res) => {
 
 exports.createUser = (req, res) => {
   const { id, username, email, password, password2, first_name, last_name, pen_first_name, pen_last_name, bio } = req.body;
-  
+
   if (!username || !email || !password || !password2 || !pen_first_name) {
     return res.status(400).json({ error: 'Username, password, and email are required' });
   }
