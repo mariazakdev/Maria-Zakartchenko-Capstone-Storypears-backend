@@ -4,6 +4,10 @@ require('dotenv').config();
 const app = express();
 const { PORT, CORS_ORIGIN } = process.env;
 const router = express.Router();
+const expressSession = require('express-session');
+const helmet = require('helmet');
+const passport = require('passport');
+const GitHubStrategy = require('passport-github2').Strategy;
 
 const storiesRoutes = require('./routes/storiesRoutes.js');
 const genresRoutes = require ('./routes/genresRoutes.js');
@@ -13,6 +17,7 @@ const emotionsRoutes = require ('./routes/emotionsRoutes.js');
 const linksRoutes = require('./routes/linksRoutes.js');
 const feelingsRoutes = require('./routes/feelingsRoutes.js');
 const halfStoryRoutes = require('./routes/halfStoryRoutes.js');
+const loginRoutes= require('./routes/loginRoutes.js');
 
 // Middleware
 app.use(cors({ origin: CORS_ORIGIN }));
@@ -28,6 +33,7 @@ app.use ('/emotions', emotionsRoutes);
 app.use('/links', linksRoutes);
 app.use('/feelings', feelingsRoutes);
 app.use('/halfstories', halfStoryRoutes);
+app.use('./login', loginRoutes);
 
 
 
