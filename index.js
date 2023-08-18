@@ -9,6 +9,10 @@ const helmet = require('helmet');
 const passport = require('passport');
 const GitHubStrategy = require('passport-github2').Strategy;
 const knex = require('./db/db');
+const expressSession = require('express-session');
+const helmet = require('helmet');
+const passport = require('passport');
+const GitHubStrategy = require('passport-github2').Strategy;
 
 const storiesRoutes = require('./routes/storiesRoutes.js');
 const genresRoutes = require ('./routes/genresRoutes.js');
