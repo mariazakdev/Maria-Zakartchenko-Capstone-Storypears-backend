@@ -1,7 +1,7 @@
 const knex = require('../db/db');
 const bcrypt = require('bcrypt');
 
-const login = async (req, res) => {
+exports.login = async (req, res) => {
   try {
     const { username, password } = req.body;
 
@@ -11,8 +11,9 @@ const login = async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    // For now, we're assuming password checking without bcrypt.
-    if (user.password !== password) {
+    // Compare the provided password with the hashed password in the database
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
@@ -22,8 +23,4 @@ const login = async (req, res) => {
     console.error('Login error:', error);
     return res.status(500).json({ message: 'An error occurred' });
   }
-};
-
-module.exports = {
-  login,
 };
