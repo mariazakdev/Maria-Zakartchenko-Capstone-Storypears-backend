@@ -21,6 +21,7 @@ const linksRoutes = require('./routes/linksRoutes.js');
 const feelingsRoutes = require('./routes/feelingsRoutes.js');
 const halfStoryRoutes = require('./routes/halfStoryRoutes.js');
 const authRoutes = require('./routes/auth');
+const authRoutes = require('./routes/auth');
 
 // Middleware
 app.use(cors({ origin: CORS_ORIGIN }));
