@@ -1,25 +1,16 @@
-const passport = require('passport');
+const express = require('express');
+const router = express.Router();
+const linksController = require('../controllers/loginController');
 
-// Route to start GitHub authentication
-router.get('/auth/github', passport.authenticate('github'));
+app.get('/login', (req, res) => {
+  res.render('login'); // Render your login form template
+});
 
-// GitHub authentication callback route
-router.get(
-  '/auth/github/callback',
-  passport.authenticate('github', {
-    successRedirect: '/success', 
-    failureRedirect: '/login'    
+app.post('/login',
+  passport.authenticate('local', {
+    successRedirect: '/profile', // Redirect on successful login
+    failureRedirect: '/login',   // Redirect on failed login
+    failureFlash: true,         // Enable flash messages
   })
 );
-
-module.exports = router;const express = require('express');
-const router = express.Router();
-const loginController = require('../controllers/loginController');
-
-router.get('/', loginController.getAllUsers);
-router.get('/:id', loginController.getUserById);
-router.post('/', loginController.createUser);
-router.put('/:id', loginController.updateUser);
-router.delete('/:id', loginController.deleteUser);
-
 module.exports = router;

@@ -40,7 +40,6 @@ exports.createUser = (req, res) => {
   const userId = id || newId;
   knex('users')
     .insert({
-      id: userId,
       username,
       email,
       password,
