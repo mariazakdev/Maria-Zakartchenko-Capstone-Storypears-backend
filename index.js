@@ -42,6 +42,7 @@ const linksRoutes = require('./routes/linksRoutes.js');
 const feelingsRoutes = require('./routes/feelingsRoutes.js');
 const halfStoryRoutes = require('./routes/halfStoryRoutes.js');
 const authRoutes = require('./routes/authRoutes.js');
+const profileRoutes = require('./routes/profileRoutes.js');
 
 app.use('/stories', storiesRoutes);
 app.use('/genres', genresRoutes);
@@ -53,6 +54,8 @@ app.use('/feelings', feelingsRoutes);
 app.use('/halfstories', halfStoryRoutes);
 // Mount authentication routes
 app.use('/auth', authRoutes);
+app.use('/profile', profileRoutes);
+
 
 app.listen(PORT, () => {
   console.log(`Listening at http://localhost:${PORT}`);

@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../config');
 const verifyToken = require('../middleware/verifyToken');
 
+
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', async (err, user) => {
     if (err || !user) {
@@ -101,5 +102,8 @@ router.get('/protected-route', verifyToken, (req, res) => {
   // Your protected route logic here
   res.status(200).json({ message: 'This is a protected route', userId: req.userId });
 });
+
+
+
 
 module.exports = router;
