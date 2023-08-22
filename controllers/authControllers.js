@@ -1,17 +1,30 @@
+
 const knex = require("../db/db");
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
+const config = require('../config');
 
 // Display the login form
 function showLoginForm(req, res) {
-  res.render('login'); // Render your login form template
+  res.render('login'); 
 }
 
 // Handle login form submission using Passport middleware
 function handleLogin(req, res, next) {
-  passport.authenticate('local', {
-    successRedirect: '/profile', // Redirect on successful login
-    failureRedirect: '/login',   // Redirect on failed login
-    failureFlash: true,         // Enable flash messages
+  passport.authenticate('local', async (err, user) => {
+    if (err || !user) {
+      return res.status(401).json({ message: 'Authentication failed' });
+    }
+
+    // Generate a JWT token upon successful login
+    const token = jwt.sign({ userId: user.id }, config.jwtSecret, { expiresIn: '1h' });
+
+    res.status(200).json({
+      success: true,
+      message: 'Login successful',
+      user: user,
+      token: token,
+    });
   })(req, res, next);
 }
 

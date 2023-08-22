@@ -7,18 +7,16 @@ const router = express.Router();
 const expressSession = require('express-session');
 const helmet = require('helmet');
 const passport = require('passport');
-const GitHubStrategy = require('passport-github2').Strategy;
 const knex = require('knex')(require('./knexfile.js'));
 const passportConfig = require('./passport');
-const session = require('express-session');
 
 
 // Middleware
 app.use(
   cors({ 
-    origin: CORS_ORIGIN ,
+    origin: CORS_ORIGIN,
     methods: "GET, POST, PUT, DELETE",
-    credentials:true,
+    credentials: true,
   }));
 app.use(express.json());
 app.use(express.static('public'));
@@ -53,7 +51,6 @@ app.use('/emotions', emotionsRoutes);
 app.use('/links', linksRoutes);
 app.use('/feelings', feelingsRoutes);
 app.use('/halfstories', halfStoryRoutes);
-
 // Mount authentication routes
 app.use('/auth', authRoutes);
 
