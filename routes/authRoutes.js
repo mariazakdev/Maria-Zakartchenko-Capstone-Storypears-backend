@@ -34,12 +34,6 @@ router.post('/register', async (req, res) => {
 
     // Perform server-side validation, check if fields are valid
 
-    // Check if the username is already taken
-    const existingUser = await knex('users').where({ username }).first();
-    if (existingUser) {
-      return res.status(400).json({ message: 'Username is already taken.' });
-    }
-
     // Hash the password
     const hashedPassword = await authUtils.hashPassword(password);
 
@@ -55,21 +49,21 @@ router.post('/register', async (req, res) => {
     };
 
     // Insert the user into the database
-const [userId] = await knex('users').insert(newUser);
-const createdUser = await knex('users').where({ id: userId }).first();
+    const [userId] = await knex('users').insert(newUser);
+    const createdUser = await knex('users').where({ id: userId }).first();
 
-// Generate a JWT token upon successful registration
-const token = jwt.sign({ userId: createdUser.id }, config.jwtSecret, { expiresIn: '1h' });
+    // Generate a JWT token upon successful registration
+    const token = jwt.sign({ userId: createdUser.id }, config.jwtSecret, { expiresIn: '1h' });
 
-// Set the token as a cookie in the HTTP response
-res.cookie('token', token, {
-  httpOnly: true, // Make the cookie accessible only through HTTP (not JavaScript)
-  secure: true,    // Set to true in a production environment with HTTPS
-  sameSite: 'strict', // Apply same-site cookie attribute for security
-});
+    // Set the token as a cookie in the HTTP response
+    res.cookie('token', token, {
+      httpOnly: true, // Make the cookie accessible only through HTTP (not JavaScript)
+      secure: true,    // Set to true in a production environment with HTTPS
+      sameSite: 'strict', // Apply same-site cookie attribute for security
+    });
 
-// Return the token in the response to the client
-return res.status(201).json({ user: createdUser, token: token });
+    // Return the token in the response to the client
+    return res.status(201).json({ user: createdUser, token: token });
   } catch (err) {
     console.error('Registration error:', err);
     res.status(500).json({ message: 'Registration failed.' });
