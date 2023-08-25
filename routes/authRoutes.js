@@ -10,10 +10,10 @@ const passport = require('passport');
 const authUtils = require('../utils/authUtils');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
-const verifyToken = require('../middleware/verifyToken');
 const bcrypt = require('bcrypt');
-
+const { generateToken } = require('../jwt/jwtHelpers'); 
 const {CLIENT_URL } = process.env;
+const { authenticateJwt } = require('../middleware/jwtMiddleware'); 
 
 
 router.post('/register', async (req, res) => {
@@ -40,15 +40,15 @@ router.post('/register', async (req, res) => {
     const [userId] = await knex('users').insert(newUser);
     const createdUser = await knex('users').where({ id: userId }).first();
 
-    // Generate a JWT token upon successful registration
-    const token = jwt.sign({ userId: createdUser.id }, config.jwtSecret, { expiresIn: '1h' });
+      // Generate a JWT token upon successful registration
+      const token = jwt.sign({ userId: createdUser.id }, config.jwtSecret, { expiresIn: '1h' });
 
-    // Set the token as a cookie in the HTTP response
-    res.cookie('token', token, {
-      httpOnly: true, // Make the cookie accessible only through HTTP (not JavaScript)
-      secure: true,    // Set to true in a production environment with HTTPS
-      sameSite: 'strict', // Apply same-site cookie attribute for security
-    });
+      // Set the token as a cookie in the HTTP response
+      res.cookie('token', token, {
+        httpOnly: true, // Make the cookie accessible only through HTTP (not JavaScript)
+        secure: true, // Set to true in a production environment with HTTPS
+        sameSite: 'strict', // Apply same-site cookie attribute for security
+      });
 
     // Return the token in the response to the client
     return res.status(201).json({ user: createdUser, token: token });
@@ -58,40 +58,34 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// router.post('/login', (req, res) => {
-//   const requestBody = req.body;
-//   // You can perform any processing you need with the request body here
-//   // For now, let's just send the request body back as a response
-//   res.json(requestBody);
-// });
 
-
+  // ADD here  If login is successful, generate a JWT token and send it as a response
 router.post('/login', loginController.login);
 
+// Protected route
+router.get('/profile', authenticateJwt, async (req, res) => {
+  try {
+    const { id, email, first_name, last_name, pen_first_name, pen_last_name, bio } = req.user;
 
+    const userProfile = {
+      id,
+      email,
+      first_name,
+      last_name,
+      pen_first_name,
+      pen_last_name,
+      bio
+    };
 
-
-
-
-
-
-
-
-
-
-// User profile endpoint that requires authentication
-router.get('/profile', (req, res) => {
-  // Passport stores authenticated user information on `req.user` object.
-  // Comes from done function of `deserializeUser`
-
-  // If `req.user` isn't found send back a 401 Unauthorized response
-  if (req.user === undefined)
-    return res.status(401).json({ message: 'Unauthorized' });
-
-  // If user is currently authenticated, send back user info
-  res.status(200).json(req.user);
+    res.json({
+      message: 'You have access to this protected route!',
+      user: userProfile,
+    });
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    res.status(500).json({ message: 'Error fetching user profile.' });
+  }
 });
-
 // Create a logout endpoint
 router.get('/logout', (req, res) => {
   // Passport adds the logout method to request, it will end user session
@@ -103,7 +97,7 @@ router.get('/logout', (req, res) => {
       // Redirect the user back to client-side application
       res.redirect(process.env.CLIENT_URL);
   });
+
+
 });
-
-
 module.exports = router;
