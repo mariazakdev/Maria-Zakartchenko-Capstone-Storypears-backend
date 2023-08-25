@@ -1,26 +1,72 @@
-const knex = require('../db/db');
-const bcrypt = require('bcrypt');
+const { validationResult } = require("express-validator");
+const loginService = require("../services/loginService");
 
-exports.login = async (req, res) => {
-  try {
-    const { username, password } = req.body;
 
-    // Check if the username exists in the database
-    const user = await knex('users').where('username', username).first();
-    if (!user) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+async function authenticateUser(email, password) {
+    try {
+      const user = await db("users")
+        .where({ email: email })
+        .first();
+  
+      if (user && user.password === password) {
+        // User is authenticated
+        return user;
+      } else {
+        // User not found or incorrect password
+        return null;
+      }
+    } catch (error) {
+      throw error;
     }
-
-    // Compare the provided password with the hashed password in the database
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
-      return res.status(401).json({ message: 'Invalid credentials' });
-    }
-
-    // Successful login
-    return res.status(200).json({ message: 'Login successful' });
-  } catch (error) {
-    console.error('Login error:', error);
-    return res.status(500).json({ message: 'An error occurred' });
   }
-};
+  
+  module.exports = {
+    authenticateUser,
+  };
+
+
+// const handleLogin = async (req, res) => {
+//     let errorsArr = [];
+//     let validationErrors = validationResult(req);
+//     if (!validationErrors.isEmpty()) {
+//         let errors = Object.values(validationErrors.mapped());
+//         errors.forEach((item) => {
+//             errorsArr.push(item.msg);
+//         });
+//         return res.redirect("/login");
+//     }
+
+//     try {
+//         await loginService.handleLogin(req.body.email, req.body.password);
+//         return res.redirect("/");
+//     } catch (err) {
+//         return res.redirect("/login");
+//     }
+// };
+
+// const checkLoggedIn = (req, res, next) => {
+//     if (!req.isAuthenticated()) {
+//         return res.redirect("/login");
+//     }
+//     next();
+// };
+
+// const checkLoggedOut = (req, res, next) => {
+//     if (req.isAuthenticated()) {
+//         return res.redirect("/");
+//     }
+//     next();
+// }; 
+
+// const postLogOut = (req, res) => {
+//     req.session.destroy(function(err) {
+//         return res.redirect("/login");
+//     });
+// };
+
+// module.exports = {
+//     handleLogin,
+//     checkLoggedIn,
+//     checkLoggedOut,
+//     postLogOut
+// };
