@@ -43,7 +43,7 @@ exports.createStory = (req, res) => {
   ) {
     return res
       .status(422)
-      .json({ error: "Unprocessable Entity: All fields are required" });
+      .json({ error: "Unprocessable Entity: All fields are required -backend" });
   }
   const newId = uuidv4();
   knex("stories")
@@ -60,8 +60,8 @@ exports.createStory = (req, res) => {
       res.status(201).json({ success: true, id: newId });
     })
     .catch((err) => {
-      console.error("Error creating a story:", err);
-      res.status(500).json({ error: "Internal Server Error" });
+      console.error("Error creating a story:-backend:", err);
+      res.status(500).json({ error: "Internal Server Error -backend" });
     });
 };
 

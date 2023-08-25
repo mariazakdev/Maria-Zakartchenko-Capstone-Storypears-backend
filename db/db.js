@@ -10,6 +10,15 @@ const knex = require('knex')({
     port: 3306,
   },
 });
+// Check database connection
+knex
+  .raw('SELECT 1')
+  .then(() => {
+    console.log('Connected to the BEAUTIFUL database.');
+  })
+  .catch((err) => {
+    console.error('Error connecting to the database:', err);
+  });
 
 process.on('SIGINT', () => {
   knex.destroy(() => {
