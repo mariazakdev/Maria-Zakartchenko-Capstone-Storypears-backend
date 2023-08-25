@@ -1,26 +1,29 @@
-const knex = require('../db/db');
-const bcrypt = require('bcrypt');
+const passport = require('passport');
 
-exports.login = async (req, res) => {
-  try {
-    const { username, password } = req.body;
+// Login controller function
+const login = (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      return next(err); // Pass any errors to the error handler
+    }
 
-    // Check if the username exists in the database
-    const user = await knex('users').where('username', username).first();
     if (!user) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+      // Authentication failed, return an appropriate response
+      return res.status(401).json({ message: info.message });
     }
 
-    // Compare the provided password with the hashed password in the database
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
-      return res.status(401).json({ message: 'Invalid credentials' });
-    }
+    // Use req.logIn to establish a session
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
 
-    // Successful login
-    return res.status(200).json({ message: 'Login successful' });
-  } catch (error) {
-    console.error('Login error:', error);
-    return res.status(500).json({ message: 'An error occurred' });
-  }
+      // Authentication succeeded, return a success response
+      return res.status(200).json({ message: 'Authentication successful' });
+    });
+  })(req, res, next);
+};
+
+module.exports = {
+  login,
 };

@@ -1,32 +1,19 @@
 const express = require('express');
-const authController = require('../controllers/authControllers');
-const router = require("express").Router();
-const passport = require("passport");
-const authUtils = require('../utils/authUtils')
-const knex = require('../db/db');
+const router = express.Router();
+const knex = require('../db/db')
+require('dotenv').config();
+
+const loginController = require('../controllers/loginControllers');
+
+const auth = require('../validation/authValidation');
+const passport = require('passport');
+const authUtils = require('../utils/authUtils');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 const verifyToken = require('../middleware/verifyToken');
+const bcrypt = require('bcrypt');
 
-
-router.post('/login', (req, res, next) => {
-  passport.authenticate('local', async (err, user) => {
-    if (err || !user) {
-      return res.status(401).json({ message: 'Authentication failed' });
-    }
-
-    // Generate a JWT token upon successful login
-    const token = jwt.sign({ userId: user.id }, config.jwtSecret, { expiresIn: '1h' });
-
-    // Send the token in the response
-    res.status(200).json({
-      success: true,
-      message: 'Login successful',
-      user: user,
-      token: token,
-    });
-  })(req, res, next);
-});
+const {CLIENT_URL } = process.env;
 
 
 router.post('/register', async (req, res) => {
@@ -71,39 +58,52 @@ router.post('/register', async (req, res) => {
   }
 });
 
-router.get("/login/success", (req, res) => {
-  if (req.user) {
-    res.status(200).json({
-      success: true,
-      message: "successfull",
-      user: req.user,
-      //   cookies: req.cookies // JWT
-    });
-  }
+// router.post('/login', (req, res) => {
+//   const requestBody = req.body;
+//   // You can perform any processing you need with the request body here
+//   // For now, let's just send the request body back as a response
+//   res.json(requestBody);
+// });
+
+
+router.post('/login', loginController.login);
+
+
+
+
+
+
+
+
+
+
+
+
+// User profile endpoint that requires authentication
+router.get('/profile', (req, res) => {
+  // Passport stores authenticated user information on `req.user` object.
+  // Comes from done function of `deserializeUser`
+
+  // If `req.user` isn't found send back a 401 Unauthorized response
+  if (req.user === undefined)
+    return res.status(401).json({ message: 'Unauthorized' });
+
+  // If user is currently authenticated, send back user info
+  res.status(200).json(req.user);
 });
 
-router.get("/login/failed", (req, res) => {
-  res.status(401).json({
-    success: false,
-    message: "failure",
-  });
-});
-
+// Create a logout endpoint
 router.get('/logout', (req, res) => {
+  // Passport adds the logout method to request, it will end user session
   req.logout((error) => {
+      // This callback function runs after the logout function
       if (error) {
           return res.status(500).json({message: "Server error, please try again later", error: error});
       }
+      // Redirect the user back to client-side application
       res.redirect(process.env.CLIENT_URL);
   });
 });
-
-router.get('/protected-route', verifyToken, (req, res) => {
-  // Your protected route logic here
-  res.status(200).json({ message: 'This is a protected route', userId: req.userId });
-});
-
-
 
 
 module.exports = router;

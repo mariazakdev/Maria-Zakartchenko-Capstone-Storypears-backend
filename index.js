@@ -1,36 +1,102 @@
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config();
-const app = express();
-const { PORT, CORS_ORIGIN } = process.env;
-const router = express.Router();
-const expressSession = require('express-session');
-const helmet = require('helmet');
+const session = require('express-session');
 const passport = require('passport');
-const knex = require('knex')(require('./knexfile.js'));
-const passportConfig = require('./passport');
+const LocalStrategy = require('passport-local').Strategy;
+const KnexSessionStore = require('connect-session-knex')(session);
+const bcrypt = require('bcrypt');
+const knex = require('./db/db'); // Your database configuration
+require('dotenv').config();
 
+// Initialize Express app
+const app = express();
 
-// Middleware
-app.use(
-  cors({ 
-    origin: CORS_ORIGIN,
-    methods: "GET, POST, PUT, DELETE",
-    credentials: true,
-  }));
+// Load environment variables
+const { PORT, CORS_ORIGIN, SESSION_SECRET } = process.env;
+
+// Middleware setup
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static('public'));
-app.use(
-  expressSession({
-    secret: process.env.SESSION_SECRET, 
-    resave: false,
-    saveUninitialized: true,
-  })
-);
+app.use(cors({
+  origin: CORS_ORIGIN,
+  methods: "GET, POST, PUT, DELETE",
+  credentials: true,
+}));
+// Setup session management using express-session and connect-session-knex
+app.use(session({
+  store: new KnexSessionStore({ knex }),
+  secret: SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+}));
 
 // Initialize Passport
 app.use(passport.initialize());
 app.use(passport.session());
+
+
+app.use(express.json());
+app.use(express.static('public'));
+// Configure Passport with the Local Strategy for authentication
+passport.use(
+  new LocalStrategy(
+    {
+      usernameField: 'email',
+      passwordField: 'password',
+    },
+    (email, password, done) => {
+      // Authenticate user against your database
+      knex('users')
+        .where({ email: email })
+        .first()
+        .then((user) => {
+          if (!user) {
+            return done(null, false, { message: 'Incorrect email or password' });
+          }
+
+          // Compare password with the hashed password from the database
+          bcrypt.compare(password, user.password, (err, result) => {
+            if (err) {
+              return done(err);
+            }
+
+            if (!result) {
+              return done(null, false, { message: 'Incorrect email or password' });
+            }
+
+            // Authentication successful, return the user
+            return done(null, user);
+          });
+        })
+        .catch((err) => {
+          return done(err);
+        });
+    }
+  )
+);
+
+// Serialize user to store in the session
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+// Deserialize user from the session
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await knex('users')
+      .where({ id: id })
+      .first();
+
+    if (!user) {
+      return done(null, false);
+    }
+
+    return done(null, user);
+  } catch (err) {
+    return done(err);
+  }
+});
+
 
 // Import and mount your routes
 const storiesRoutes = require('./routes/storiesRoutes.js');
