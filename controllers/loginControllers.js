@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const config = require("../config"); 
 const authUtils = require("../utils/authUtils"); 
 const { createTokens} = require("../jwt/jwt");
-
+const cookieName = process.env.COOKIE_NAME;
 
 const login = async (req, res, next) => {
   passport.authenticate("local", async (err, user, info) => {
@@ -20,7 +20,7 @@ const login = async (req, res, next) => {
       const accessToken = createTokens(user);
 
       // Set the access token as a cookie in the HTTP response
-      res.cookie("access-token", accessToken, {
+      res.cookie(cookieName, accessToken, {
         maxAge: 60 * 60 * 24 * 30 * 1000, // 30 days
         httpOnly: true, // extra protection
       });

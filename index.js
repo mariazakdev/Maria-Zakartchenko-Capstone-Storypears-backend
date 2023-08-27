@@ -45,6 +45,7 @@ app.use(passport.session());
 app.use(express.json());
 app.use(express.static("public"));
 app.use(cookieParser());
+
 // Configure Passport with the Local Strategy for authentication
 passport.use(
   new LocalStrategy(

@@ -87,42 +87,7 @@ router.get('/profile', validateToken, async (req, res) => {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 });
-// router.get('/profile', authenticateJwt, async (req, res) => {
-//   try {
-//     // The user information is already available in req.user due to Passport.js
-//     const user = req.user;
 
-//     // You can directly use the user object for the response
-//     return res.json({ user });
-//   } catch (error) {
-//     console.error("Error fetching user profile:", error);
-//     return res.status(500).json({ error: "Internal Server Error" });
-//   }
-// });
-// // Protected route
-// router.get('/profile', authenticateJwt, async (req, res) => {
-//   try {
-//     const { id, email, first_name, last_name, pen_first_name, pen_last_name, bio } = req.user;
-
-//     const userProfile = {
-//       id,
-//       email,
-//       first_name,
-//       last_name,
-//       pen_first_name,
-//       pen_last_name,
-//       bio
-//     };
-
-//     res.json({
-//       message: 'You have access to this protected route!',
-//       user: userProfile,
-//     });
-//   } catch (error) {
-//     console.error('Error fetching user profile:', error);
-//     res.status(500).json({ message: 'Error fetching user profile.' });
-//   }
-// });
 // Create a logout endpoint
 router.get('/logout', (req, res) => {
   // Passport adds the logout method to request, it will end user session
