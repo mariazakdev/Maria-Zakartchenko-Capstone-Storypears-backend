@@ -4,16 +4,17 @@ const knex = require('../db/db')
 require('dotenv').config();
 
 const loginController = require('../controllers/loginControllers');
-
+const jwt = require('jsonwebtoken');
 const auth = require('../validation/authValidation');
 const passport = require('passport');
 const authUtils = require('../utils/authUtils');
-const jwt = require('jsonwebtoken');
+
 const config = require('../config');
 const bcrypt = require('bcrypt');
 const { generateToken } = require('../jwt/jwtHelpers'); 
 const {CLIENT_URL } = process.env;
 const { authenticateJwt } = require('../middleware/jwtMiddleware'); 
+const { validateToken } = require("../jwt/jwt");
 
 
 router.post('/register', async (req, res) => {
@@ -62,30 +63,66 @@ router.post('/register', async (req, res) => {
   // ADD here  If login is successful, generate a JWT token and send it as a response
 router.post('/login', loginController.login);
 
-// Protected route
-router.get('/profile', authenticateJwt, async (req, res) => {
+
+
+// router.get('/profile', validateToken , (req, res) => {
+// res.json("profile");
+// });
+router.get('/profile', validateToken, async (req, res) => {
   try {
-    const { id, email, first_name, last_name, pen_first_name, pen_last_name, bio } = req.user;
+    // Get the user's id from the token payload
+    const userId = req.user.id;
 
-    const userProfile = {
-      id,
-      email,
-      first_name,
-      last_name,
-      pen_first_name,
-      pen_last_name,
-      bio
-    };
+    // Look up the user in your database based on their id
+    const user = await knex('users').where({ id: userId }).first();
 
-    res.json({
-      message: 'You have access to this protected route!',
-      user: userProfile,
-    });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Return the authenticated user's information in the response
+    return res.json({ user });
   } catch (error) {
-    console.error('Error fetching user profile:', error);
-    res.status(500).json({ message: 'Error fetching user profile.' });
+    console.error("Error fetching user profile:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 });
+// router.get('/profile', authenticateJwt, async (req, res) => {
+//   try {
+//     // The user information is already available in req.user due to Passport.js
+//     const user = req.user;
+
+//     // You can directly use the user object for the response
+//     return res.json({ user });
+//   } catch (error) {
+//     console.error("Error fetching user profile:", error);
+//     return res.status(500).json({ error: "Internal Server Error" });
+//   }
+// });
+// // Protected route
+// router.get('/profile', authenticateJwt, async (req, res) => {
+//   try {
+//     const { id, email, first_name, last_name, pen_first_name, pen_last_name, bio } = req.user;
+
+//     const userProfile = {
+//       id,
+//       email,
+//       first_name,
+//       last_name,
+//       pen_first_name,
+//       pen_last_name,
+//       bio
+//     };
+
+//     res.json({
+//       message: 'You have access to this protected route!',
+//       user: userProfile,
+//     });
+//   } catch (error) {
+//     console.error('Error fetching user profile:', error);
+//     res.status(500).json({ message: 'Error fetching user profile.' });
+//   }
+// });
 // Create a logout endpoint
 router.get('/logout', (req, res) => {
   // Passport adds the logout method to request, it will end user session

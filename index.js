@@ -8,6 +8,8 @@ const bcrypt = require("bcrypt");
 const knex = require("./db/db"); // Your database configuration
 require("dotenv").config();
 const { authenticateJwt } = require("./middleware/jwtMiddleware");
+const bodyParser = require('body-parser');
+const cookieParser = require("cookie-parser");
 
 // Initialize Express app
 const app = express();
@@ -16,6 +18,7 @@ const app = express();
 const { PORT, CORS_ORIGIN, SESSION_SECRET } = process.env;
 
 // Middleware setup
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(
@@ -41,6 +44,7 @@ app.use(passport.session());
 
 app.use(express.json());
 app.use(express.static("public"));
+app.use(cookieParser());
 // Configure Passport with the Local Strategy for authentication
 passport.use(
   new LocalStrategy(
@@ -71,9 +75,8 @@ passport.use(
                 message: "Incorrect email or password",
               });
             }
-
             // Authentication successful, return the user
-            return done(null, user);
+            return done(null, { id: user.id, ...user });          
           });
         })
         .catch((err) => {
@@ -125,7 +128,6 @@ app.use("/feelings", feelingsRoutes);
 app.use("/halfstories", halfStoryRoutes);
 // Mount authentication routes
 app.use("/auth", authRoutes);
-app.use("/profile", profileRoutes);
 
 app.listen(PORT, () => {
   console.log(`Listening at http://localhost:${PORT}`);
