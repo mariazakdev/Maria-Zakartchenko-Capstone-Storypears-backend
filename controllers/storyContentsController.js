@@ -1,24 +1,21 @@
 const { v4: uuidv4 } = require('uuid');
 const knex = require('../db/db');
 
-// Create a new story content
 const createStoryContent = async (req, res) => {
   try {
-    // Extract data from the request body
-    const { story_id, user_id, content } = req.body;
-
-    // Generate a new UUID for the story content
+    const { story_id, user_id, content, genre, title } = req.body;
     const id = uuidv4();
 
-    // Insert the new story content into the database
     await knex('story_contents').insert({
       id,
       story_id,
       user_id,
       content,
+      genre, 
+      title, 
     });
 
-    return res.status(201).json({ id, story_id, user_id, content });
+    return res.status(201).json({ id, story_id, user_id, content, genre, title });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: 'Failed to create story content' });
