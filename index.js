@@ -116,8 +116,8 @@ const emotionsRoutes = require("./routes/emotionsRoutes.js");
 const linksRoutes = require("./routes/linksRoutes.js");
 const feelingsRoutes = require("./routes/feelingsRoutes.js");
 const halfStoryRoutes = require("./routes/halfStoryRoutes.js");
+const storyContents = require('./routes/storyContentsRoutes.js');
 const authRoutes = require("./routes/authRoutes.js");
-const profileRoutes = require("./routes/profileRoutes.js");
 
 app.use("/stories", storiesRoutes);
 app.use("/genres", genresRoutes);
@@ -127,6 +127,7 @@ app.use("/emotions", emotionsRoutes);
 app.use("/links", linksRoutes);
 app.use("/feelings", feelingsRoutes);
 app.use("/halfstories", halfStoryRoutes);
+app.use('/storycontents', storyContents);
 // Mount authentication routes
 app.use("/auth", authRoutes);
 
