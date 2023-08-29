@@ -6,6 +6,7 @@ const seedData = [
     title: "The Magical Forest",
     story_id: "3f52aa34-dbf9-42e4-977f-eedae1332e3a",
     genre: "Fantasy",
+    genre_id: '42001db0-3633-11ee-be56-0242ac120002',
     feeling: null,
   },
   {
@@ -15,6 +16,7 @@ const seedData = [
     title: "The Colonization of Mars",
     story_id: "38dbbd48-720d-4f71-94e3-6c1c4860e0f2",
     genre: "Science Fiction",
+    genre_id: 'ff9b5746-3632-11ee-be56-0242ac120002',
     feeling: null,
   },
   {
@@ -24,6 +26,7 @@ const seedData = [
     title: "The Mansion Mystery",
     story_id: "70e9e760-45ec-4fe7-a405-9ec57cf83587",
     genre: "Mystery",
+    genre_id: '5a4988b6-3633-11ee-be56-0242ac120002',
     feeling: null,
   },
   {
@@ -33,6 +36,7 @@ const seedData = [
     title: "The Knight's Quest",
     story_id: "a5c40a68-9c22-429e-8f61-274b82694764",
     genre: "Adventure",
+    genre_id: '3abbaf10-4669-11ee-be56-0242ac120002',
     feeling: null,
   },
   {
@@ -42,6 +46,7 @@ const seedData = [
     title: "Sunset Dreams",
     story_id: "7f06d8a2-8ff5-4c2b-9e46-59f212a59851",
     genre: "Romance",
+    genre_id: 'f6afd2ce-3632-11ee-be56-0242ac120002',
     feeling: null,
   },
   {
@@ -50,7 +55,8 @@ const seedData = [
     user_id: 66,
     title: "Cross-Country Adventure",
     story_id: "90b01bc1-56f9-4cc4-9099-7a4e990ed9e9",
-    genre: "Travel",
+    genre: "Drama",
+    genre_id: '1e1fe9f2-3633-11ee-be56-0242ac120002',
     feeling: null,
   },
   {
@@ -59,7 +65,8 @@ const seedData = [
     user_id: 67,
     title: "Culinary Delights",
     story_id: "f3b60b9f-5ad0-4be0-8654-dab3b56f147e",
-    genre: "Food",
+    genre: "Drama",
+    genre_id: '1e1fe9f2-3633-11ee-be56-0242ac120002',
     feeling: null,
   },
   {
@@ -69,6 +76,7 @@ const seedData = [
     title: "The Sorcerer's Quest",
     story_id: "847fc65a-783d-47c1-b7f2-fad4f313a924",
     genre: "Fantasy",
+    genre_id: '42001db0-3633-11ee-be56-0242ac120002',
     feeling: null,
   },
   {
@@ -78,6 +86,7 @@ const seedData = [
     title: "Behind the Scenes",
     story_id: "05f9ff87-90e6-41c2-bb4d-6a4be0c582ae",
     genre: "Drama",
+    genre_id: '1e1fe9f2-3633-11ee-be56-0242ac120002',
     feeling: null,
   },
   {
@@ -87,6 +96,7 @@ const seedData = [
     title: "Galactic Explorers",
     story_id: "c64d5a80-9c3e-4620-8c94-b4b74580e2a2",
     genre: "Science Fiction",
+    genre_id: 'ff9b5746-3632-11ee-be56-0242ac120002',
     feeling: null,
   },
   {
@@ -96,6 +106,7 @@ const seedData = [
     title: "Survivors",
     story_id: "ad13e1c4-9f11-47d0-8e65-25d1545b82c1",
     genre: "Dystopian",
+    genre_id: '55a2ec8c-3aaa-11ee-be56-0242ac120002',
     feeling: null,
   },
   {
@@ -105,6 +116,7 @@ const seedData = [
     title: "Harvest of Dreams",
     story_id: "9d78a0c0-6f4e-4b8d-8279-fd3d5fb7cdea",
     genre: "Drama",
+    genre_id: '1e1fe9f2-3633-11ee-be56-0242ac120002',
     feeling: null,
   },
 ];
