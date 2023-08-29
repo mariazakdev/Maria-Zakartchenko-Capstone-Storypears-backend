@@ -1,6 +1,6 @@
 module.exports = [
   {
-    username: 'user2',
+    username: 'janesmith',
     githubId: null,
     googleId: null,
     facebookId: null,
@@ -19,7 +19,7 @@ module.exports = [
     ])
   },
   {
-    username: 'user1',
+    username: 'Penelopedrake',
     githubId: null,
     googleId: null,
     facebookId: null,
@@ -37,7 +37,7 @@ module.exports = [
     ])
   },
   {
-    username: 'user3',
+    username: 'oliviasmith',
     githubId: null,
     googleId: null,
     facebookId: null,
@@ -56,7 +56,7 @@ module.exports = [
     ])
   },
   {
-    username: 'user4',
+    username: 'emilybrown',
     githubId: null,
     googleId: null,
     facebookId: null,
@@ -74,7 +74,7 @@ module.exports = [
     ])
   },
   {
-    username: 'user5',
+    username: 'sophinaclarke',
     githubId: null,
     googleId: null,
     facebookId: null,
@@ -93,7 +93,7 @@ module.exports = [
     ])
   },
   {
-    username: 'user6',
+    username: 'avarodriquez',
     githubId: null,
     googleId: null,
     facebookId: null,
@@ -110,7 +110,7 @@ module.exports = [
     ])
   },
   {
-    username: 'user7',
+    username: 'liammartinez',
     githubId: null,
     googleId: null,
     facebookId: null,
@@ -129,7 +129,7 @@ module.exports = [
     ])
   },
   {
-    username: 'user8',
+    username: 'miamatinez',
     githubId: null,
     googleId: null,
     facebookId: null,
@@ -148,7 +148,7 @@ module.exports = [
     ])
   },
   {
-    username: 'user9',
+    username: 'noahwilson',
     githubId: null,
     googleId: null,
     facebookId: null,
@@ -166,7 +166,7 @@ module.exports = [
     ])
   },
   {
-    username: 'user10',
+    username: 'isabellahall',
     githubId: null,
     googleId: null,
     facebookId: null,

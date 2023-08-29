@@ -34,7 +34,6 @@ const getAllStoryContents = async (req, res) => {
     return res.status(500).json({ error: 'Failed to fetch story contents' });
   }
 };
-
 // Get a single story content by ID
 const getStoryContentById = async (req, res) => {
   const { id } = req.params;
