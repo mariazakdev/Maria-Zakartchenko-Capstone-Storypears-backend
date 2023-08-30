@@ -3,7 +3,7 @@ const knex = require('../db/db');
 
 const createStoryContent = async (req, res) => {
   try {
-    const { story_id, user_id, content, genre, title } = req.body;
+    const { story_id, user_id, content, genre, genre_id, title } = req.body;
     const id = uuidv4();
 
     await knex('story_contents').insert({

@@ -1,5 +1,6 @@
 module.exports = [
   {
+    id: 61,
     username: 'janesmith',
     githubId: null,
     googleId: null,
@@ -19,6 +20,7 @@ module.exports = [
     ])
   },
   {
+    id: 62,
     username: 'Penelopedrake',
     githubId: null,
     googleId: null,
@@ -37,6 +39,7 @@ module.exports = [
     ])
   },
   {
+    id: 63,
     username: 'oliviasmith',
     githubId: null,
     googleId: null,
@@ -56,6 +59,7 @@ module.exports = [
     ])
   },
   {
+    id: 64,
     username: 'emilybrown',
     githubId: null,
     googleId: null,
@@ -74,6 +78,7 @@ module.exports = [
     ])
   },
   {
+    id: 65,
     username: 'sophinaclarke',
     githubId: null,
     googleId: null,
@@ -93,6 +98,7 @@ module.exports = [
     ])
   },
   {
+    id: 66,
     username: 'avarodriquez',
     githubId: null,
     googleId: null,
@@ -110,6 +116,7 @@ module.exports = [
     ])
   },
   {
+    id: 67,
     username: 'liammartinez',
     githubId: null,
     googleId: null,
@@ -129,6 +136,7 @@ module.exports = [
     ])
   },
   {
+    id: 68,
     username: 'miamatinez',
     githubId: null,
     googleId: null,
@@ -148,6 +156,7 @@ module.exports = [
     ])
   },
   {
+    id: 69,
     username: 'noahwilson',
     githubId: null,
     googleId: null,
@@ -166,6 +175,7 @@ module.exports = [
     ])
   },
   {
+    id: 70,
     username: 'isabellahall',
     githubId: null,
     googleId: null,
