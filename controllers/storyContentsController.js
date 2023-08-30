@@ -3,11 +3,10 @@ const knex = require('../db/db');
 
 const createStoryContent = async (req, res) => {
   try {
-    const { story_id, user_id, content, genre, genre_id, title } = req.body;
-    const id = uuidv4();
+    const { story_id, user_id, content, genre, title } = req.body;
 
+    // Insert the data into the story_contents table
     await knex('story_contents').insert({
-      id,
       story_id,
       user_id,
       content,
@@ -15,12 +14,14 @@ const createStoryContent = async (req, res) => {
       title, 
     });
 
-    return res.status(201).json({ id, story_id, user_id, content, genre, title });
+    // Respond with a success message
+    return res.status(201).json({ message: 'Story content created successfully' });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: 'Failed to create story content' });
   }
 };
+
 
 // Get all story contents
 const getAllStoryContents = async (req, res) => {
