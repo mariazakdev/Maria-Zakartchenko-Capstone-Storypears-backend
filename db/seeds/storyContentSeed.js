@@ -1,8 +1,14 @@
-const seedData = require('../seed_data/storyContents'); 
+const storyContentsSeedData = require("../seed_data/storyContents");
+
 exports.seed = function (knex) {
-  return knex('story_contents')
-    .del()
-    .then(function () {
-      return knex('story_contents').insert(seedData);
-    });
+  return knex.transaction(async (trx) => {
+    try {
+
+      await knex('story_contents').transacting(trx).insert(storyContentsSeedData);
+
+      await trx.commit();
+    } catch (error) {
+      await trx.rollback(error);
+    }
+  });
 };

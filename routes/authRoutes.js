@@ -19,7 +19,7 @@ const { validateToken } = require("../jwt/jwt");
 
 router.post('/register', async (req, res) => {
   try {
-    const { email, password, first_name, last_name, pen_first_name, pen_last_name, bio } = req.body;
+    const { username, email, password, first_name, last_name, pen_first_name, pen_last_name, bio } = req.body;
 
     // Perform server-side validation, check if fields are valid
 
@@ -28,6 +28,7 @@ router.post('/register', async (req, res) => {
 
     // Create the new user
     const newUser = {
+      username,
       email,
       password: hashedPassword,
       first_name,
@@ -46,15 +47,18 @@ router.post('/register', async (req, res) => {
 
       // Set the token as a cookie in the HTTP response
       res.cookie('token', token, {
-        httpOnly: true, // Make the cookie accessible only through HTTP (not JavaScript)
-        secure: true, // Set to true in a production environment with HTTPS
-        sameSite: 'strict', // Apply same-site cookie attribute for security
+        httpOnly: true, 
+        secure: true, 
+        sameSite: 'strict', 
       });
 
     // Return the token in the response to the client
     return res.status(201).json({ user: createdUser, token: token });
   } catch (err) {
     console.error('Registration error:', err);
+    
+    console.error('Registration error:', err.message, err.stack);
+
     res.status(500).json({ message: 'Registration failed.' });
   }
 });

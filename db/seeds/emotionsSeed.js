@@ -16,7 +16,7 @@ exports.seed = function(knex) {
           { name: 'Bewilderment' },
           { name: 'Longing' },
           { name: 'Desolation' },
-          { name: 'Rapture' },
+          { name: 'Silly' },
           { name: 'Nostalgia' },
           { name: 'Indignation' },
           { name: 'Intrigue' },

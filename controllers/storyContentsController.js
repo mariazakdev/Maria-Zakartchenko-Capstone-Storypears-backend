@@ -1,5 +1,7 @@
 const { v4: uuidv4 } = require('uuid');
 const knex = require('../db/db');
+
+
 const createStoryContent = async (req, res) => {
   try {
     const { story_id, user_id, content, genre, emotion, title } = req.body;

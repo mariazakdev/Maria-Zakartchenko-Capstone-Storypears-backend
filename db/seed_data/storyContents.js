@@ -90,7 +90,7 @@ const seedData = [
                In this realm of enigma, where secrets do hide.`,
     genre: null,
     emotion: "Intrigue",
-    title: "My Fantasy Story"
+    title: "Open That Heart"
   },
   {
     story_id: "462d201a-a46c-40ac-a55c-7c848ef767ef",
@@ -103,7 +103,7 @@ const seedData = [
                In this world of fury, where I choose to fight.`,
     genre: null,
     emotion: "Indignation",
-    title: "My Fantasy Story"
+    title: "Be Not Yourself"
   },
   {
     story_id: "462d201a-a46c-40ac-a55c-7c848ef767ef",
@@ -116,7 +116,7 @@ const seedData = [
                In this world of yesteryears, where emotions take flight.`,
     genre: null,
     emotion: "Nostalgia",
-    title: "My Fantasy Story"
+    title: "Them"
   },
   {
     story_id: "462d201a-a46c-40ac-a55c-7c848ef767ef",
@@ -129,7 +129,7 @@ const seedData = [
                In this world of fury, where I choose to smite.`,
     genre: null,
     emotion: "Rage",
-    title: "My Fantasy Story"
+    title: "Never Going Back"
   },
   {
     story_id: "462d201a-a46c-40ac-a55c-7c848ef767ef",
@@ -141,8 +141,8 @@ const seedData = [
                Laughter and delight, in this joyful night,
                In this world of happiness, where everything is bright.`,
     genre: null,
-    emotion: "Rapture",
-    title: "My Fantasy Story"
+    emotion: "Silly",
+    title: "I find Myself Again"
   },
   {
     story_id: "462d201a-a46c-40ac-a55c-7c848ef767ef",
@@ -155,7 +155,7 @@ const seedData = [
                In this world of repulsion, where I shun from sight.`,
     genre: null,
     emotion: "Revulsion",
-    title: "My Fantasy Story"
+    title: "Dirt in The Soul"
   }
   
 
