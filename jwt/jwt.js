@@ -2,18 +2,23 @@ const { sign, verify } = require("jsonwebtoken");
 const { jwtSecret } = require('../config'); 
 
 /**
- * Creates a JWT for a given user.
+ * Creates JWTs (access and refresh) for a given user.
  * @param {Object} user - The user object.
- * @returns {string} - The generated JWT.
+ * @returns {Object} - The generated JWTs.
  */
 const createTokens = (user) => {
   console.log("User Data for Token:", user);
-  const accessToken = sign({ id: user.id }, jwtSecret, { expiresIn: '48h' });
+  
+  const accessToken = sign({ id: user.id }, jwtSecret, { expiresIn: '1h' });
   console.log("Generated Access Token:", accessToken);
-  return accessToken;
+  
+  const refreshToken = sign({ id: user.id }, jwtSecret, { expiresIn: '7d' });
+  console.log("Generated Refresh Token:", refreshToken);
+  
+  return { accessToken, refreshToken };
 };
 
-/**
+/** 
  * Middleware to validate the JWT in the request.
  * @param {Object} req - The Express request object.
  * @param {Object} res - The Express response object.
@@ -23,7 +28,7 @@ const validateToken = (req, res, next) => {
   console.log("Inside validateToken Middleware.");
   console.log("Received Cookies:", req.cookies);
   
-  const accessToken = req.cookies["pearCookie"];
+  const accessToken = req.cookies["pearAccessToken"];  // Renamed cookie name
 
   if (!accessToken) {
     return res.status(401).json({ error: "Access token is missing. User not authenticated." });
@@ -39,7 +44,6 @@ const validateToken = (req, res, next) => {
     return next();
   } catch (err) {
     console.error("Error while verifying token:", err);
-    // JWT verification can fail for multiple reasons, such as token expiration or token tampering.
     if (err.name === 'TokenExpiredError') {
       return res.status(401).json({ error: "Access token has expired. Please log in again." });
     } else {

@@ -3,24 +3,22 @@ const cors = require("cors");
 const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const KnexSessionStore = require("connect-session-knex")(session);
 const bcrypt = require("bcrypt");
-const knex = require("./db/db"); // Your database configuration
+const knex = require("./db/db");
 require("dotenv").config();
 const { authenticateJwt } = require("./middleware/jwtMiddleware");
 const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
+const KnexSessionStore = require('connect-session-knex')(session);
 
-// Initialize Express app
 const app = express();
 
-// Load environment variables
 const { PORT, CORS_ORIGIN, SESSION_SECRET } = process.env;
 
-// Middleware setup
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 app.use(
   cors({
     origin: CORS_ORIGIN,
@@ -28,17 +26,24 @@ app.use(
     credentials: true,
   })
 );
-// Setup session management using express-session and connect-session-knex
+
+const store = new KnexSessionStore({
+  knex: knex, 
+  tablename: 'sessions',
+  createtable: true,
+});
+
 app.use(
   session({
-    store: new KnexSessionStore({ knex }),
     secret: SESSION_SECRET,
+    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
+    store: store,
     resave: false,
     saveUninitialized: false,
   })
 );
 
-// Initialize Passport
+// Passport
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -65,7 +70,6 @@ passport.use(
             });
           }
 
-          // Compare password with the hashed password from the database
           bcrypt.compare(password, user.password, (err, result) => {
             if (err) {
               return done(err);
@@ -76,7 +80,6 @@ passport.use(
                 message: "Incorrect email or password",
               });
             }
-            // Authentication successful, return the user
             return done(null, { id: user.id, ...user });          
           });
         })
@@ -87,12 +90,10 @@ passport.use(
   )
 );
 
-// Serialize user to store in the session
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-// Deserialize user from the session
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await knex("users").where({ id: id }).first();
@@ -128,7 +129,7 @@ app.use("/links", linksRoutes);
 app.use("/feelings", feelingsRoutes);
 app.use("/halfstories", halfStoryRoutes);
 app.use('/storycontents', storyContents);
-// Mount authentication routes
+// Authentication routes
 app.use("/auth", authRoutes);
 
 app.listen(PORT, () => {

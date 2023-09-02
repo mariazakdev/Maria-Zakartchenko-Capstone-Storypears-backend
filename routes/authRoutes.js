@@ -46,7 +46,7 @@ router.post('/register', async (req, res) => {
       const token = jwt.sign({ userId: createdUser.id }, config.jwtSecret, { expiresIn: '1h' });
 
       // Set the token as a cookie in the HTTP response
-      res.cookie('token', token, {
+      res.cookie('pearAccessToken', token, {
         httpOnly: true, 
         secure: true, 
         sameSite: 'strict', 
@@ -92,7 +92,6 @@ router.get('/profile', validateToken, async (req, res) => {
   }
 });
 
-// Create a logout endpoint
 router.get('/logout', (req, res) => {
   // Passport adds the logout method to request, it will end user session
   req.logout((error) => {
@@ -100,10 +99,14 @@ router.get('/logout', (req, res) => {
       if (error) {
           return res.status(500).json({message: "Server error, please try again later", error: error});
       }
+      
+      // Clear the JWT token cookie
+      res.clearCookie('pearAccessToken');
+
       // Redirect the user back to client-side application
       res.redirect(process.env.CLIENT_URL);
   });
-
-
 });
+
+
 module.exports = router;

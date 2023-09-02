@@ -15,27 +15,41 @@ const login = async (req, res, next) => {
       return res.status(401).json({ message: info.message });
     }
 
-    // If authentication is successful, generate a JWT token
     try {
-      const accessToken = createTokens(user);
+      const tokens = createTokens(user); // This function now returns both access and refresh tokens
+      const accessToken = tokens.accessToken;
+      const refreshToken = tokens.refreshToken;
 
-      // Set the access token as a cookie in the HTTP response
-      res.cookie(cookieName, accessToken, {
-        maxAge: 60 * 60 * 24 * 30 * 1000, // 30 days
-        httpOnly: true, // extra protection
+      // Store the refresh token in the database
+      await knex('refresh_tokens').insert({
+        user_id: user.id,
+        token: refreshToken,
+        expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)  // 7 days from now
       });
 
-      // Authentication succeeded, return a success response with the token
+      // Set the access token as a cookie (or however you're sending it back)
+      res.cookie('pearAccessToken', accessToken, {
+        maxAge: 60 * 60 * 24 * 30 * 1000, // 30 days
+        httpOnly: true,
+      });
+
+      // You might also want to send the refresh token back as a secure HTTP-only cookie
+      res.cookie('pearRefreshToken', refreshToken, {
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        httpOnly: true,
+        secure: true,  // ensure it's set for HTTPS connections
+      });
+
       return res
         .status(200)
-        .json({ message: "Authentication successful", token: accessToken });
+        .json({ message: "Authentication successful", token: accessToken, refreshToken: refreshToken });
     } catch (error) {
-      // Handle token generation error
-      console.error("Token generation error:", error);
+      console.error("Token generation or storage error:", error);
       return next(error);
     }
   })(req, res, next);
 };
+
 
 module.exports = {
   login,
