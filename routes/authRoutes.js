@@ -49,7 +49,7 @@ router.post('/register', async (req, res) => {
       res.cookie('pearAccessToken', token, {
         httpOnly: true, 
         secure: true, 
-        sameSite: 'strict', 
+        // sameSite: 'strict', 
       });
 
     // Return the token in the response to the client
@@ -92,20 +92,9 @@ router.get('/profile', validateToken, async (req, res) => {
   }
 });
 
-router.get('/logout', (req, res) => {
-  // Passport adds the logout method to request, it will end user session
-  req.logout((error) => {
-      // This callback function runs after the logout function
-      if (error) {
-          return res.status(500).json({message: "Server error, please try again later", error: error});
-      }
-      
-      // Clear the JWT token cookie
-      res.clearCookie('pearAccessToken');
-
-      // Redirect the user back to client-side application
-      res.redirect(process.env.CLIENT_URL);
-  });
+router.post('/logout', (req, res) => {
+  res.clearCookie('pearAccessToken');
+  res.json({ success: true });
 });
 
 

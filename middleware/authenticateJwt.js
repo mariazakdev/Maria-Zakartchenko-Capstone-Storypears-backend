@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const config = require("../config");
 
 const authenticateJwt = (req, res, next) => {
-  const token = req.cookies.token;
+  const token = req.cookies.pearAccessToken; 
 
   if (!token) {
     return res.status(401).json({ message: "Unauthorized" });

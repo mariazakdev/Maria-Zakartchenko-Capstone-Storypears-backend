@@ -1,9 +1,6 @@
 const passport = require("passport");
-const jwt = require("jsonwebtoken");
-const config = require("../config"); 
-const authUtils = require("../utils/authUtils"); 
-const { createTokens} = require("../jwt/jwt");
-const cookieName = process.env.COOKIE_NAME;
+const knex = require("../db/db");
+const { createTokens } = require("../jwt/jwt");
 
 const login = async (req, res, next) => {
   passport.authenticate("local", async (err, user, info) => {
@@ -16,7 +13,7 @@ const login = async (req, res, next) => {
     }
 
     try {
-      const tokens = createTokens(user); // This function now returns both access and refresh tokens
+      const tokens = createTokens(user); 
       const accessToken = tokens.accessToken;
       const refreshToken = tokens.refreshToken;
 
@@ -27,22 +24,23 @@ const login = async (req, res, next) => {
         expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)  // 7 days from now
       });
 
-      // Set the access token as a cookie (or however you're sending it back)
+      // Set the access token as an HttpOnly cookie
       res.cookie('pearAccessToken', accessToken, {
         maxAge: 60 * 60 * 24 * 30 * 1000, // 30 days
         httpOnly: true,
+        secure: process.env.NODE_ENV === 'production', // ensure it's set for HTTPS connections only in production
+        sameSite: 'strict', // or 'none' if cross-domain
       });
 
-      // You might also want to send the refresh token back as a secure HTTP-only cookie
+      // Send the refresh token back as a secure HttpOnly cookie
       res.cookie('pearRefreshToken', refreshToken, {
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
         httpOnly: true,
-        secure: true,  // ensure it's set for HTTPS connections
+        secure: process.env.NODE_ENV === 'production', // ensure it's set for HTTPS connections only in production
+        sameSite: 'strict', // or 'none' if cross-domain
       });
 
-      return res
-        .status(200)
-        .json({ message: "Authentication successful", token: accessToken, refreshToken: refreshToken });
+      return res.status(200).json({ message: "Authentication successful" });
     } catch (error) {
       console.error("Token generation or storage error:", error);
       return next(error);
@@ -50,8 +48,6 @@ const login = async (req, res, next) => {
   })(req, res, next);
 };
 
-
 module.exports = {
   login,
 };
-
