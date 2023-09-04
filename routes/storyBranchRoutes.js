@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/storyControllers');
+const controller = require('../controllers/storyBranchControllers');
 
 router.post('/', controller.createStoryBranch);
 router.get('/:id', controller.getStoryBranch);

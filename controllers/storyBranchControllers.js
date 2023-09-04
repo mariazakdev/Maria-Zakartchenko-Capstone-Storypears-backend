@@ -56,7 +56,16 @@ module.exports = {
         } catch (error) {
             res.status(500).send({ message: 'Error adding contribution' });
         }
+    },
+
+async deleteStoryBranch(req, res) {
+    const { id } = req.params;
+    try {
+        await knex('storybranch').where({ id }).del();
+        res.send({ message: 'Story branch deleted successfully' });
+    } catch (error) {
+        res.status(500).send({ message: 'Error deleting story branch' });
     }
+}
+
 };
-
-

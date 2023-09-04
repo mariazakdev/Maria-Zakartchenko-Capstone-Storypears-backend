@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/storyControllers');
+const controller = require('../controllers/storyTreeControllers');
 
 router.post('/', controller.createStoryTree);
 router.get('/:id', controller.getStoryTree);
