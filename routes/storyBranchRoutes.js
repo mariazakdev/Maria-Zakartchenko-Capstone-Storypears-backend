@@ -3,6 +3,7 @@ const router = express.Router();
 const controller = require('../controllers/storyBranchControllers');
 
 router.post('/', controller.createStoryBranch);
+router.get('/', controller.getAllStoryBranches);
 router.get('/:id', controller.getStoryBranch);
 router.put('/:id', controller.updateStoryBranch);
 router.delete('/:id', controller.deleteStoryBranch);

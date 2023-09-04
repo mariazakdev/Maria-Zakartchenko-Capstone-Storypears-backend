@@ -16,7 +16,15 @@ module.exports = {
             res.status(500).send({ message: 'Error creating story branch' });
         }
     },
-
+ 
+    async getAllStoryBranches(req, res) {
+        try {
+            const allStoryBranches = await knex('storybranch').select();
+            res.send(allStoryBranches);
+        } catch (error) {
+            res.status(500).send({ message: 'Error fetching all story branches' });
+        }
+    },
     async getStoryBranch(req, res) {
         const { id } = req.params;
         try {

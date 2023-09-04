@@ -29,7 +29,14 @@ module.exports = {
             res.status(500).send({ message: 'Error creating story tree' });
         }
     },
-
+    async getAllStoryTrees(req, res) {
+        try {
+            const allStoryTrees = await knex('storytree').select();
+            res.send(allStoryTrees);
+        } catch (error) {
+            res.status(500).send({ message: 'Error fetching all story trees' });
+        }
+    },
     async getStoryTree(req, res) {
         const { id } = req.params;
         try {

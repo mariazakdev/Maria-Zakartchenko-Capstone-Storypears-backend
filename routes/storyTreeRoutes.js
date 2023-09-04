@@ -3,6 +3,7 @@ const router = express.Router();
 const controller = require('../controllers/storyTreeControllers');
 
 router.post('/', controller.createStoryTree);
+router.get('/', controller.getAllStoryTrees);
 router.get('/:id', controller.getStoryTree);
 router.delete('/:id', controller.deleteStoryTree);
 
