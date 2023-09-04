@@ -7,3 +7,4 @@ exports.seed = function (knex) {
       return knex("genres").insert(genresData);
     });
 };
+

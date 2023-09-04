@@ -14,7 +14,7 @@ router.get('/:id', storyContentsController.getStoryContentById);
 // Update a story content by ID
 router.put('/:id', storyContentsController.updateStoryContent);
 
-// Delete a story content by ID
-router.delete('/:id', storyContentsController.deleteStoryContent);
+// Delete a story content by story ID
+router.delete('/story_id/:storyId', storyContentsController.deleteStoriesByStoryId);
 
 module.exports = router;

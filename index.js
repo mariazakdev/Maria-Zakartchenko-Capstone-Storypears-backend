@@ -120,6 +120,10 @@ const halfStoryRoutes = require("./routes/halfStoryRoutes.js");
 const storyContents = require('./routes/storyContentsRoutes.js');
 const fullstoriesRoutes = require("./routes/fullstoriesRoutes.js");
 const authRoutes = require("./routes/authRoutes.js");
+const storyBranchRoutes = require("./routes/storyBranchRoutes.js");
+const storyTreeRoutes = require("./routes/storyTreeRoutes.js");
+
+
 
 app.use("/stories", storiesRoutes);
 app.use("/genres", genresRoutes);
@@ -131,6 +135,8 @@ app.use("/feelings", feelingsRoutes);
 app.use("/halfstories", halfStoryRoutes);
 app.use('/storycontents', storyContents);
 app.use('/fullstories', fullstoriesRoutes);
+app.use("/storybranch", storyBranchRoutes);
+app.use("/storytree", storyTreeRoutes);
 
 // Authentication routes
 app.use("/auth", authRoutes);

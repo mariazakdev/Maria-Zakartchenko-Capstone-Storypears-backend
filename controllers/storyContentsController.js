@@ -22,7 +22,6 @@ const createStoryContent = async (req, res) => {
   }
 };
 
-// Get all story contents
 const getAllStoryContents = async (req, res) => {
   try {
     const storyContents = await knex('story_contents').select('*');
@@ -33,12 +32,10 @@ const getAllStoryContents = async (req, res) => {
     return res.status(500).json({ error: 'Failed to fetch story contents' });
   }
 };
-// Get a single story content by ID
 const getStoryContentById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    // Retrieve the story content by its ID
     const storyContent = await knex('story_contents').where({ id }).first();
 
     if (!storyContent) {
@@ -52,15 +49,12 @@ const getStoryContentById = async (req, res) => {
   }
 };
 
-// Update a story content by ID
 const updateStoryContent = async (req, res) => {
   const { id } = req.params;
 
   try {
-    // Extract data from the request body for updates
     const { content } = req.body;
 
-    // Update the story content in the database
     await knex('story_contents').where({ id }).update({ content });
 
     return res.status(200).json({ id, content });
@@ -70,18 +64,16 @@ const updateStoryContent = async (req, res) => {
   }
 };
 
-// Delete a story content by ID
-const deleteStoryContent = async (req, res) => {
-  const { id } = req.params;
+const deleteStoriesByStoryId = async (req, res) => {
+  const { storyId } = req.params;
 
   try {
-    // Delete the story content from the database
-    await knex('story_contents').where({ id }).del();
+    await knex('story_contents').where({ story_id: storyId }).del();
 
-    return res.status(204).end(); // No content, successful deletion
+    return res.status(204).end(); 
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: 'Failed to delete story content' });
+    return res.status(500).json({ error: 'Failed to delete story contents' });
   }
 };
 
@@ -90,5 +82,5 @@ module.exports = {
   getAllStoryContents,
   getStoryContentById,
   updateStoryContent,
-  deleteStoryContent,
+  deleteStoriesByStoryId,
 };
