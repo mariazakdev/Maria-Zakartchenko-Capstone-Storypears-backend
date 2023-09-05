@@ -6,22 +6,22 @@ module.exports = {
 
     async createStoryTree(req, res) {
         const { title, genre, emotion, content, user_id, branch_id } = req.body;
-
+    
         if (!branch_id) {
             return res.status(400).send({ message: 'Branch ID is required' });
         }
-
+    
         try {
             await knex.transaction(async trx => {
                 const [newStoryTreeId] = await trx('storytree').insert({
                     title,
                     genre,
                     emotion,
-                    content: JSON.stringify([content]),
+                    complete_story: JSON.stringify(content),
                     user_id
                 });
-
-                await trx('storybranch').where({ id: branch_id }).del();
+    
+                await trx('storybranche').where({ id: branch_id }).del();
                 res.status(201).send({ id: newStoryTreeId });
             });
         } catch (error) {
@@ -29,6 +29,8 @@ module.exports = {
             res.status(500).send({ message: 'Error creating story tree' });
         }
     },
+
+
     async getAllStoryTrees(req, res) {
         try {
             const allStoryTrees = await knex('storytree').select();
