@@ -109,32 +109,22 @@ passport.deserializeUser(async (id, done) => {
 });
 
 // Import and mount your routes
-const storiesRoutes = require("./routes/storiesRoutes.js");
 const genresRoutes = require("./routes/genresRoutes.js");
 const usersRoutes = require("./routes/usersRoutes.js");
 const promptsRoutes = require("./routes/promptsRoutes.js");
 const emotionsRoutes = require("./routes/emotionsRoutes.js");
-const linksRoutes = require("./routes/linksRoutes.js");
 const feelingsRoutes = require("./routes/feelingsRoutes.js");
-const halfStoryRoutes = require("./routes/halfStoryRoutes.js");
-const storyContents = require('./routes/storyContentsRoutes.js');
-const fullstoriesRoutes = require("./routes/fullstoriesRoutes.js");
 const authRoutes = require("./routes/authRoutes.js");
 const storyBranchRoutes = require("./routes/storyBranchRoutes.js");
 const storyTreeRoutes = require("./routes/storyTreeRoutes.js");
 
 
 
-app.use("/stories", storiesRoutes);
 app.use("/genres", genresRoutes);
 app.use("/users", usersRoutes);
 app.use("/prompts", promptsRoutes);
 app.use("/emotions", emotionsRoutes);
-app.use("/links", linksRoutes);
 app.use("/feelings", feelingsRoutes);
-app.use("/halfstories", halfStoryRoutes);
-app.use('/storycontents', storyContents);
-app.use('/fullstories', fullstoriesRoutes);
 app.use("/storybranch", storyBranchRoutes);
 app.use("/storytree", storyTreeRoutes);
 

@@ -23,6 +23,7 @@ exports.seed = function(knex) {
           { name: 'Depression' },
           { name: 'Love' },
           { name: 'Joy' },
+          { name: 'Wonder' },
         ]);
       });
   };

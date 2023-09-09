@@ -2,35 +2,43 @@ const knex = require('../db/db');
 
 module.exports = {
 
-    // createStoryTree tansaction portion was helped with help of chatGPT. Was modified by me. 
-
     async createStoryTree(req, res) {
-        const { title, genre, emotion, content, user_id, branch_id } = req.body;
-    
-        if (!branch_id) {
-            return res.status(400).send({ message: 'Branch ID is required' });
-        }
-    
+        const { title, genre, emotion, content, branch_id } = req.body;
+        
         try {
             await knex.transaction(async trx => {
-                const [newStoryTreeId] = await trx('storytree').insert({
-                    title,
-                    genre,
-                    emotion,
-                    complete_story: JSON.stringify(content),
-                    user_id
-                });
+                const existingStoryTree = await trx('storytree').where({ title }).first();
+        
+                if (existingStoryTree) {
+                    await trx('storytree')
+                        .where({ title })
+                        .update({
+                            genre,
+                            emotion,
+                            complete_story: JSON.stringify(content)
+                        });
+                    res.status(200).send({ message: 'Story tree updated successfully' });
+                } else {
+                    const [newStoryTreeId] = await trx('storytree').insert({
+                        title,
+                        genre,
+                        emotion,
+                        complete_story: JSON.stringify(content)
+                    });
     
-                await trx('storybranch').where({ id: branch_id }).del();
-                res.status(201).send({ id: newStoryTreeId });
+                    if (branch_id) {
+                        await trx('storybranch').where({ id: branch_id }).del();  // Delete the branch
+                    }
+    
+                    res.status(201).send({ id: newStoryTreeId, message: 'Story tree created successfully' });
+                }
             });
         } catch (error) {
             console.error("Transaction error:", error);
-            res.status(500).send({ message: 'Error creating story tree' });
+            res.status(500).send({ message: 'Error processing story tree' });
         }
     },
-
-
+    
     async getAllStoryTrees(req, res) {
         try {
             const allStoryTrees = await knex('storytree').select();
@@ -60,5 +68,5 @@ module.exports = {
         } catch (error) {
             res.status(500).send({ message: 'Error deleting story tree' });
         }
-    }, 
+    },
 };

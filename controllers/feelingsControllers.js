@@ -1,4 +1,7 @@
 const knex = require("../db/db");
+const { v4: uuidv4 } = require('uuid');
+
+
 
 exports.index = async (req, res) => {
   try {
@@ -26,11 +29,20 @@ exports.getFeeling = async (req, res) => {
 
 exports.createFeeling = async (req, res) => {
   try {
-    await knex("feelings").insert(req.body);
-    res.status(201).json({ message: "Feeling created successfully" });
+      if (!req.body.sentence) {
+          return res.status(400).json({ message: 'Sentence is required' });
+      }
+
+      const newFeeling = {
+          id: uuidv4(), 
+          sentence: req.body.sentence 
+      };
+
+      await knex('feelings').insert(newFeeling);
+      res.status(201).json({ message: 'Feeling created successfully', id: newFeeling.id });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error' });
   }
 };
 

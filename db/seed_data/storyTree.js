@@ -2,7 +2,7 @@ module.exports = [
   {
     title: "The First Step: A Journey to School ",
     genre: "Drama",
-    emotion: "null",
+    emotion: null,
     content: JSON.stringify([
       {
         user_id: 61,
@@ -21,7 +21,7 @@ module.exports = [
   {
     title: "The Haunted House",
     genre: "Horror",
-    emotion: "null",
+    emotion: null,
     content: JSON.stringify([
       {
         user_id: 63,
@@ -40,214 +40,209 @@ module.exports = [
   {
     title: "Sir Reginald's Royal Mix-Up",
     genre: "Comedy",
-    emotion: "null",
+    emotion: null,
     content: JSON.stringify([
-        {
-            user_id: 61,
-            text: "Sir Reginald Featherbottom III, the royal butler, was known for his meticulousness. But one fateful day, due to a mix-up in his calendar, he mistakenly scheduled three royal events on the same day: a knight's induction ceremony, Princess Penelope's puppy's birthday party, and a diplomatic dinner with the neighboring kingdom."
-        },
-        {
-            user_id: 62,
-            text: "In a frantic juggle, Sir Reginald tried managing all three simultaneously. Knights clanked into the ballroom just as the puppy's clown entertainer began juggling bones. Diplomats from the neighboring kingdom were handed puppy-themed party hats instead of crowns, and the main course was a giant bone-shaped biscuit."
-        },
-        {
-            user_id: 63,
-            text: "Princess Penelope, finding the situation hilarious, declared it a 'Royal Fusion Fest.' The knights found themselves engaging in tug-of-war games with the puppy, and diplomats tried their hand at pinning the tail on the dragon."
-        },
-        {
-            user_id: 64,
-            text: "Sir Reginald, frazzled but adapting, combined the events. The knight's induction became a playful contest of 'Who can throw the dog toy the furthest?' while the diplomatic dinner discussed important treaties over cake and dog biscuits."
-        },
-        {
-            user_id: 65,
-            text: "In the midst of the unexpected revelry, the neighboring kingdom's queen commended Sir Reginald's innovative approach to diplomacy and expressed her wish to make 'Royal Fusion Fest' an annual event. Sir Reginald, red-faced but relieved, took a bow and whispered to himself, 'Never again.' Yet, the mix-up became the talk of the kingdom, celebrated for turning a potential disaster into a legendary party."
-        }
-    ])
-},
+      {
+        user_id: 61,
+        text: "Sir Reginald Featherbottom III, the royal butler, was known for his meticulousness. But one fateful day, due to a mix-up in his calendar, he mistakenly scheduled three royal events on the same day: a knight's induction ceremony, Princess Penelope's puppy's birthday party, and a diplomatic dinner with the neighboring kingdom.",
+      },
+      {
+        user_id: 62,
+        text: "In a frantic juggle, Sir Reginald tried managing all three simultaneously. Knights clanked into the ballroom just as the puppy's clown entertainer began juggling bones. Diplomats from the neighboring kingdom were handed puppy-themed party hats instead of crowns, and the main course was a giant bone-shaped biscuit.",
+      },
+      {
+        user_id: 63,
+        text: "Princess Penelope, finding the situation hilarious, declared it a 'Royal Fusion Fest.' The knights found themselves engaging in tug-of-war games with the puppy, and diplomats tried their hand at pinning the tail on the dragon.",
+      },
+      {
+        user_id: 64,
+        text: "Sir Reginald, frazzled but adapting, combined the events. The knight's induction became a playful contest of 'Who can throw the dog toy the furthest?' while the diplomatic dinner discussed important treaties over cake and dog biscuits.",
+      },
+      {
+        user_id: 65,
+        text: "In the midst of the unexpected revelry, the neighboring kingdom's queen commended Sir Reginald's innovative approach to diplomacy and expressed her wish to make 'Royal Fusion Fest' an annual event. Sir Reginald, red-faced but relieved, took a bow and whispered to himself, 'Never again.' Yet, the mix-up became the talk of the kingdom, celebrated for turning a potential disaster into a legendary party.",
+      },
+    ]),
+  },
 
-{
+  {
     title: "The Great Pudding Fiasco",
     genre: "Comedy",
-    emotion: "null",
+    emotion: null,
     content: JSON.stringify([
-        {
-            user_id: 63,
-            text: "Every year, the village of Lumbleton held its esteemed 'Pudding Extravaganza,' where competitors showcased their best pudding recipes. Mrs. Gwendolyn Trumble was the undisputed champion for five years, her secret recipe always winning her the golden spoon. This year, young Timmy Topperton, with dreams of dethroning Mrs. Trumble, devised a plan. Instead of traditional ingredients, he'd use a newly discovered fruit from the Amazon rumored to have 'magical' properties. However, what Timmy didn't know was that this fruit caused anyone who consumed it to momentarily levitate."
-        },
-        {
-            user_id: 62,
-            text: "The Extravaganza was in full swing. As judges sampled Timmy's pudding, they began floating a few feet off the ground, much to the shock and amusement of the audience. Chaos ensued as levitating villagers bumped into tents, floated into trees, and collided in mid-air. Mrs. Trumble, ever the competitor, tried a spoonful and found herself stuck on the village clock tower, her cat Claws dangling beside her. Realizing his error, Timmy and a team of non-pudding-consuming villagers worked together to bring everyone safely back to the ground using ladders, ropes, and a particularly long fishing net. In the end, the event was deemed the most entertaining Extravaganza yet. Timmy didn't win the golden spoon but did receive an award for 'Most Uplifting Recipe.'"
-        }
-    ])
-},
-{
+      {
+        user_id: 63,
+        text: "Every year, the village of Lumbleton held its esteemed 'Pudding Extravaganza,' where competitors showcased their best pudding recipes. Mrs. Gwendolyn Trumble was the undisputed champion for five years, her secret recipe always winning her the golden spoon. This year, young Timmy Topperton, with dreams of dethroning Mrs. Trumble, devised a plan. Instead of traditional ingredients, he'd use a newly discovered fruit from the Amazon rumored to have 'magical' properties. However, what Timmy didn't know was that this fruit caused anyone who consumed it to momentarily levitate.",
+      },
+      {
+        user_id: 62,
+        text: "The Extravaganza was in full swing. As judges sampled Timmy's pudding, they began floating a few feet off the ground, much to the shock and amusement of the audience. Chaos ensued as levitating villagers bumped into tents, floated into trees, and collided in mid-air. Mrs. Trumble, ever the competitor, tried a spoonful and found herself stuck on the village clock tower, her cat Claws dangling beside her. Realizing his error, Timmy and a team of non-pudding-consuming villagers worked together to bring everyone safely back to the ground using ladders, ropes, and a particularly long fishing net. In the end, the event was deemed the most entertaining Extravaganza yet. Timmy didn't win the golden spoon but did receive an award for 'Most Uplifting Recipe.'",
+      },
+    ]),
+  },
+  {
     title: "Whispers of Twilight",
-    genre: "null",
+    genre: null,
     emotion: "Melancholy",
     content: JSON.stringify([
-        {
-            user_id: 61,
-            text: "In the stillness of the night, when shadows play and stars alight, there lies a tale untold by sight, whispered by the winds, taking flight. The moon nods, in silent agreement, of tales of old and new entreatment."
-        },
-        {
-            user_id: 62,
-            text: "Echoes of ancient voices, lingering in the trees, revealing choices of destinies and fates, at world's creases. Every rustle, every breeze, holds secrets of the timeless seas."
-        },
-        {
-            user_id: 63,
-            text: "The dance of fireflies, the owl's silent hoot, are but fragments of stories, in nature's grand pursuit. Listen, for in this quiet, there's a narrative, profound and quiet."
-        }
-    ])
-},
-{
+      {
+        user_id: 61,
+        text: "In the stillness of the night, when shadows play and stars alight, there lies a tale untold by sight, whispered by the winds, taking flight. The moon nods, in silent agreement, of tales of old and new entreatment.",
+      },
+      {
+        user_id: 62,
+        text: "Echoes of ancient voices, lingering in the trees, revealing choices of destinies and fates, at world's creases. Every rustle, every breeze, holds secrets of the timeless seas.",
+      },
+      {
+        user_id: 63,
+        text: "The dance of fireflies, the owl's silent hoot, are but fragments of stories, in nature's grand pursuit. Listen, for in this quiet, there's a narrative, profound and quiet.",
+      },
+    ]),
+  },
+  {
     title: "Melodies of Dawn",
-    genre: "null",
+    genre: null,
     emotion: "Joy",
     content: JSON.stringify([
-        {
-            user_id: 64,
-            text: "As the first rays of sun, pierce the horizon's run, the world awakens to melodies, sung by birds, in harmonies. The dew-kissed flowers bloom, dispelling night's gloom."
-        },
-        {
-            user_id: 65,
-            text: "Golden hues paint the sky, as dreams of night say goodbye. The world rejoices in light, celebrating the majestic sight, of a new day, full of promise, driving away the night's darkness."
-        },
-        {
-            user_id: 66,
-            text: "In this symphony of dawn, hope is reborn and drawn. Listen to the song of the lark, heralding light from the dark, and embrace the magic that's spun, with the rising of the sun."
-        }
-    ])
-},
-{
+      {
+        user_id: 64,
+        text: "As the first rays of sun, pierce the horizon's run, the world awakens to melodies, sung by birds, in harmonies. The dew-kissed flowers bloom, dispelling night's gloom.",
+      },
+      {
+        user_id: 65,
+        text: "Golden hues paint the sky, as dreams of night say goodbye. The world rejoices in light, celebrating the majestic sight, of a new day, full of promise, driving away the night's darkness.",
+      },
+      {
+        user_id: 66,
+        text: "In this symphony of dawn, hope is reborn and drawn. Listen to the song of the lark, heralding light from the dark, and embrace the magic that's spun, with the rising of the sun.",
+      },
+    ]),
+  },
+  {
     title: "Echoes of the Forest",
-    genre: "null",
+    genre: null,
     emotion: "Serenity",
     content: JSON.stringify([
-        {
-            user_id: 67,
-            text: "In the heart of the green expanse, the forest whispers tales of chance. Each leaf, each twig, tells a tale, of wind's song and rain's gentle wail."
-        },
-        {
-            user_id: 68,
-            text: "Footsteps of creatures, big and small, echo the rhythms of nature's call. Streams that glisten, birds that soar, all part of the forest's rich folklore."
-        },
-        {
-            user_id: 69,
-            text: "Time stands still, in this place, as nature moves at its own pace. Embrace the peace, the tranquility, in the forest's boundless ability."
-        }
-    ])
-},
-{
+      {
+        user_id: 67,
+        text: "In the heart of the green expanse, the forest whispers tales of chance. Each leaf, each twig, tells a tale, of wind's song and rain's gentle wail.",
+      },
+      {
+        user_id: 68,
+        text: "Footsteps of creatures, big and small, echo the rhythms of nature's call. Streams that glisten, birds that soar, all part of the forest's rich folklore.",
+      },
+      {
+        user_id: 69,
+        text: "Time stands still, in this place, as nature moves at its own pace. Embrace the peace, the tranquility, in the forest's boundless ability.",
+      },
+    ]),
+  },
+  {
     title: "Dance of the Cosmos",
-    genre: "null",
+    genre: null,
     emotion: "Wonder",
     content: JSON.stringify([
-        {
-            user_id: 70,
-            text: "Stars shimmering, galaxies wide, the universe dances, in timeless tide. Comets blaze, planets align, in this vast space, wonders intertwine."
-        },
-        {
-            user_id: 61,
-            text: "Black holes, nebulas, mysteries unfold, tales of the cosmos, agelessly told. Through telescopes, our eyes gaze, lost in the universe's endless maze."
-        },
-        {
-            user_id: 62,
-            text: "Embrace the unknown, the vast expanse, for the cosmos offers a mesmerizing dance. Each star, each quasar, holds a tale, of time's journey, without fail."
-        }
-    ])
-},
-{
+      {
+        user_id: 70,
+        text: "Stars shimmering, galaxies wide, the universe dances, in timeless tide. Comets blaze, planets align, in this vast space, wonders intertwine.",
+      },
+      {
+        user_id: 61,
+        text: "Black holes, nebulas, mysteries unfold, tales of the cosmos, agelessly told. Through telescopes, our eyes gaze, lost in the universe's endless maze.",
+      },
+      {
+        user_id: 62,
+        text: "Embrace the unknown, the vast expanse, for the cosmos offers a mesmerizing dance. Each star, each quasar, holds a tale, of time's journey, without fail.",
+      },
+    ]),
+  },
+  {
     title: "The Silence of Elm Street",
     genre: "Thriller",
-    emotion: "null",
+    emotion: null,
     content: JSON.stringify([
-        {
-            user_id: 62,
-            text: "Elm Street was known for its tranquility, a perfect suburban utopia. But all that changed when residents began receiving blank letters with no return address. At first, they dismissed them as harmless pranks. However, as days turned into weeks, things escalated. Each house began experiencing unexplained electrical disturbances. Lights would flicker, radios would tune to static, and TV screens turned to snow, but only at precisely 3:07 AM. With the static came a faint voice muttering a sequence of numbers."
-        },
-        {
-            user_id: 63,
-            text: "Anna, a mathematician living on Elm Street, was intrigued. She started documenting the numbers, realizing they changed every night. Piecing them together, a pattern emerged – they were coordinates. Using a map, she plotted them out, and the points connected to form the outline of an old asylum located on the outskirts of town, which was demolished a decade ago. Driven by curiosity and armed with her findings, Anna and a few brave neighbors decided to explore the site. The rubble of the asylum told tales of a grim past, and deep below, they stumbled upon an untouched basement."
-        }
-    ])
-},
-{
+      {
+        user_id: 62,
+        text: "Elm Street was known for its tranquility, a perfect suburban utopia. But all that changed when residents began receiving blank letters with no return address. At first, they dismissed them as harmless pranks. However, as days turned into weeks, things escalated. Each house began experiencing unexplained electrical disturbances. Lights would flicker, radios would tune to static, and TV screens turned to snow, but only at precisely 3:07 AM. With the static came a faint voice muttering a sequence of numbers.",
+      },
+      {
+        user_id: 63,
+        text: "Anna, a mathematician living on Elm Street, was intrigued. She started documenting the numbers, realizing they changed every night. Piecing them together, a pattern emerged – they were coordinates. Using a map, she plotted them out, and the points connected to form the outline of an old asylum located on the outskirts of town, which was demolished a decade ago. Driven by curiosity and armed with her findings, Anna and a few brave neighbors decided to explore the site. The rubble of the asylum told tales of a grim past, and deep below, they stumbled upon an untouched basement.",
+      },
+    ]),
+  },
+  {
     title: "The Giddy Heights",
     genre: null,
     emotion: "Euphoria",
     content: JSON.stringify([
-        {
-            user_id: 63,
-            text: "On wings of joy, I soar so high, beyond the reach of the sapphire sky. Every beat, every thrill, is a moment of ecstasy, pure and still."
-        },
-        {
-            user_id: 64,
-            text: "Laughter bubbles, dreams take flight, in this realm of pure delight. The world's a blur, colors merge, as euphoria's intoxicating surge."
-        },
-        {
-            user_id: 65,
-            text: "Heartbeats race, spirits rise, touching the very paradise. Euphoria, the world's sweet song, where every note feels so strong."
-        }
-    ])
-},
+      {
+        user_id: 63,
+        text: "On wings of joy, I soar so high, beyond the reach of the sapphire sky. Every beat, every thrill, is a moment of ecstasy, pure and still.",
+      },
+      {
+        user_id: 64,
+        text: "Laughter bubbles, dreams take flight, in this realm of pure delight. The world's a blur, colors merge, as euphoria's intoxicating surge.",
+      },
+      {
+        user_id: 65,
+        text: "Heartbeats race, spirits rise, touching the very paradise. Euphoria, the world's sweet song, where every note feels so strong.",
+      },
+    ]),
+  },
 
-{
+  {
     title: "Shadows of Yesterday",
     genre: null,
     emotion: "Melancholy",
     content: JSON.stringify([
-        {
-            user_id: 66,
-            text: "Whispers of yesterdays gone by, memories that make the heart sigh. A longing for times, now past, moments we wished would forever last."
-        },
-        {
-            user_id: 67,
-            text: "Shadows dance, in the mind's eye, recalling tears, the silent cry. Melancholy wraps its gentle arms, reminiscing old charms."
-        },
-        {
-            user_id: 68,
-            text: "The beauty of a sunset's hue, moments of love, both old and new. In this space of tender sorrow, we find strength for tomorrow."
-        }
-    ])
-},
-{
+      {
+        user_id: 66,
+        text: "Whispers of yesterdays gone by, memories that make the heart sigh. A longing for times, now past, moments we wished would forever last.",
+      },
+      {
+        user_id: 67,
+        text: "Shadows dance, in the mind's eye, recalling tears, the silent cry. Melancholy wraps its gentle arms, reminiscing old charms.",
+      },
+      {
+        user_id: 68,
+        text: "The beauty of a sunset's hue, moments of love, both old and new. In this space of tender sorrow, we find strength for tomorrow.",
+      },
+    ]),
+  },
+  {
     title: "Calm Waters",
     genre: null,
     emotion: "Serenity",
     content: JSON.stringify([
-        {
-            user_id: 65,
-            text: "In the heart of the still lake, where reflections awake, lies serenity's gentle embrace, a moment of grace."
-        },
-        {
-            user_id: 66,
-            text: "The world fades, the mind finds shade, in this sanctuary so rare, free from every care."
-        },
-        {
-            user_id: 67,
-            text: "In the silence, in the calm, the soul finds a balm. Serenity's gift, spirits lift, in the embrace of peace, all worries cease."
-        }
-    ])
-},
+      {
+        user_id: 65,
+        text: "In the heart of the still lake, where reflections awake, lies serenity's gentle embrace, a moment of grace.",
+      },
+      {
+        user_id: 66,
+        text: "The world fades, the mind finds shade, in this sanctuary so rare, free from every care.",
+      },
+      {
+        user_id: 67,
+        text: "In the silence, in the calm, the soul finds a balm. Serenity's gift, spirits lift, in the embrace of peace, all worries cease.",
+      },
+    ]),
+  },
 
-{
+  {
     title: "Midnight Echoes",
     genre: "Thriller",
     emotion: null,
     content: JSON.stringify([
-        {
-            user_id: 63,
-            text: "Rain drizzled over the sleepy town of Rivenwood, casting shimmering reflections on the cobblestone streets. Everyone knew everyone in this tight-knit community, which is why the sudden disappearance of Lydia Harmon sent shockwaves throughout. Detective Jenna Miles, a Rivenwood native, returned from the city to handle the case. The last person to have seen Lydia was her neighbor, old Mrs. Blythe, who spoke of Lydia's distress over mysterious nightly phone calls. They were eerily silent, lasting precisely three minutes, ending with a whispered, 'Remember...'"
-        },
-        {
-            user_id: 64,
-            text: "Jenna's investigation led her to Lydia's ancestral home, Echo Manor. The sprawling mansion had a room that was sealed shut for decades - Lydia's childhood bedroom. Jenna's decision to breach the room revealed haunting murals depicting various scenes of the town, but with a sinister twist. Each painting showed a prominent townsperson meeting a gruesome end, and eerily, half of them had come true over the past century. Most chilling was the unfinished painting of a woman, eerily similar to Lydia, standing by Rivenwood's cliff, a shadowy figure looming behind her."
-        }
-    ])
-}
-
-
-
-
-
+      {
+        user_id: 63,
+        text: "Rain drizzled over the sleepy town of Rivenwood, casting shimmering reflections on the cobblestone streets. Everyone knew everyone in this tight-knit community, which is why the sudden disappearance of Lydia Harmon sent shockwaves throughout. Detective Jenna Miles, a Rivenwood native, returned from the city to handle the case. The last person to have seen Lydia was her neighbor, old Mrs. Blythe, who spoke of Lydia's distress over mysterious nightly phone calls. They were eerily silent, lasting precisely three minutes, ending with a whispered, 'Remember...'",
+      },
+      {
+        user_id: 64,
+        text: "Jenna's investigation led her to Lydia's ancestral home, Echo Manor. The sprawling mansion had a room that was sealed shut for decades - Lydia's childhood bedroom. Jenna's decision to breach the room revealed haunting murals depicting various scenes of the town, but with a sinister twist. Each painting showed a prominent townsperson meeting a gruesome end, and eerily, half of them had come true over the past century. Most chilling was the unfinished painting of a woman, eerily similar to Lydia, standing by Rivenwood's cliff, a shadowy figure looming behind her.",
+      },
+    ]),
+  },
 ];

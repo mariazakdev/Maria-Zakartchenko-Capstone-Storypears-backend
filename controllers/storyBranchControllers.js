@@ -64,22 +64,28 @@ exports.deleteStoryBranch = async (req, res) => {
 };
 
 exports.addContribution = async (req, res) => {
+    const { user_id, text } = req.body;
+  
     try {
-        const storyBranch = await knex('storybranch').where('id', req.params.id).first();
-        
-        if (!storyBranch) {
-            return res.status(404).send({ error: 'Story branch not found' });
-        }
-        
-        const contributions = JSON.parse(storyBranch.content);
-        contributions.push(req.body.content);
-        
-        await knex('storybranch').where('id', req.params.id).update({
-            content: JSON.stringify(contributions)
-        });
-
-        res.status(201).send({ message: 'Contribution added successfully' });
+      const storyBranch = await knex('storybranch').where('id', req.params.id).first();
+      
+      if (!storyBranch) {
+        return res.status(404).send({ error: 'Story branch not found' });
+      }
+  
+      const contributions = Array.isArray(JSON.parse(storyBranch.content))
+        ? JSON.parse(storyBranch.content)
+        : [];
+  
+      contributions.push({ user_id, text });
+  
+      await knex('storybranch').where('id', req.params.id).update({
+        content: JSON.stringify(contributions)
+      });
+  
+      res.status(201).send({ message: 'Contribution added successfully' });
     } catch (error) {
-        res.status(500).send({ error: 'Error adding contribution' });
+      res.status(500).send({ error: 'Error adding contribution' });
     }
-};
+  };
+  

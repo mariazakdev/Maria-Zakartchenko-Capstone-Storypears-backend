@@ -21,12 +21,8 @@ router.post('/register', async (req, res) => {
   try {
     const { username, email, password, first_name, last_name, pen_first_name, pen_last_name, bio } = req.body;
 
-    // Perform server-side validation, check if fields are valid
 
-    // Hash the password
     const hashedPassword = await authUtils.hashPassword(password);
-
-    // Create the new user
     const newUser = {
       username,
       email,
@@ -38,21 +34,17 @@ router.post('/register', async (req, res) => {
       bio
     };
 
-    // Insert the user into the database
     const [userId] = await knex('users').insert(newUser);
     const createdUser = await knex('users').where({ id: userId }).first();
 
-      // Generate a JWT token upon successful registration
       const token = jwt.sign({ userId: createdUser.id }, config.jwtSecret, { expiresIn: '1h' });
 
-      // Set the token as a cookie in the HTTP response
       res.cookie('pearAccessToken', token, {
         httpOnly: true, 
         secure: true, 
-        // sameSite: 'strict', 
+        sameSite: 'strict', 
       });
 
-    // Return the token in the response to the client
     return res.status(201).json({ user: createdUser, token: token });
   } catch (err) {
     console.error('Registration error:', err);
@@ -64,7 +56,6 @@ router.post('/register', async (req, res) => {
 });
 
 
-  // ADD here  If login is successful, generate a JWT token and send it as a response
 router.post('/login', loginController.login);
 
 
