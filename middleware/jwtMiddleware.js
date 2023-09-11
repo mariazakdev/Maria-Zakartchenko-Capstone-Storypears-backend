@@ -1,29 +1,23 @@
-const passport = require('passport');
-const { Strategy, ExtractJwt } = require('passport-jwt');
+const jwt = require('jsonwebtoken');
 const { jwtSecret } = require('../config');
-const knex = require('../db/db'); 
 
-const jwtOptions = {
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: jwtSecret,
-};
-
-const jwtStrategy = new Strategy(jwtOptions, async (payload, done) => {
-  try {
-    const user = await User.findById(payload.sub);
-
-    if (user) {
-      done(null, user);
-    } else {
-      done(null, false);
+const validateToken = (req, res, next) => {
+    const token = req.cookies.pearAccessToken;
+    
+    if (!token) {
+        return res.status(403).json({ message: "No token provided." });
     }
-  } catch (error) {
-    done(error, false);
-  }
-});
 
-passport.use(jwtStrategy);
+    jwt.verify(token, jwtSecret, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({ message: "Failed to authenticate token." });
+        }
 
-module.exports = {
-  authenticateJwt: passport.authenticate('jwt', { session: false }),
-};
+        // Set the user object for the request
+        req.user = { id: decoded.userId };
+        
+        next();
+    });
+}
+
+module.exports = { validateToken };

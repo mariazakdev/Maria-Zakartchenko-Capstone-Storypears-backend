@@ -2,14 +2,33 @@ const knex = require('../db/db');
 
 exports.createStoryBranch = async (req, res) => {
     try {
+        const { title, genre, emotion, content } = req.body;
+
+        // Ensure that one of genre or emotion is provided and the other is null
+        if (!title || !content || (genre && emotion) || (!genre && !emotion)) {
+            return res.status(400).send({ error: 'Invalid fields. Exactly one of genre or emotion should be provided.' });
+        }
+
+        // Check if only one of genre or emotion is non-null
+        if ((genre && typeof genre !== 'string') || (emotion && typeof emotion !== 'string')) {
+            return res.status(400).send({ error: 'Genre and Emotion should either be a valid string or null.' });
+        }
+
+        // Insert the story branch
         const [id] = await knex('storybranch').insert({
-            content: JSON.stringify(req.body.content)
+            title: title,
+            genre: genre,
+            emotion: emotion,
+            content: JSON.stringify(content) 
         });
+
         res.status(201).send({ id, content: req.body.content });
     } catch (error) {
+        console.error(error);
         res.status(500).send({ error: 'Error creating story branch' });
     }
 };
+
 
 exports.getAllStoryBranches = async (req, res) => {
     try {

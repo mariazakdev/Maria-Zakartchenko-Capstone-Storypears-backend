@@ -1,19 +1,16 @@
 const express = require("express");
 const cors = require("cors");
-const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
 const knex = require("./db/db");
 require("dotenv").config();
-const { authenticateJwt } = require("./middleware/jwtMiddleware");
 const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
-const KnexSessionStore = require('connect-session-knex')(session);
 
 const app = express();
 
-const { PORT, CORS_ORIGIN, SESSION_SECRET } = process.env;
+const { PORT, CORS_ORIGIN } = process.env;
 
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
@@ -27,31 +24,13 @@ app.use(
   })
 );
 
-const store = new KnexSessionStore({
-  knex: knex, 
-  tablename: 'sessions',
-  createtable: true,
-});
-
-app.use(
-  session({
-    secret: SESSION_SECRET,
-    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
-    store: store,
-    resave: false,
-    saveUninitialized: false,
-  })
-);
-
 // Passport
 app.use(passport.initialize());
-app.use(passport.session());
 
 app.use(express.json());
 app.use(express.static("public"));
 app.use(cookieParser());
 
-// Configure Passport with the Local Strategy for authentication
 passport.use(
   new LocalStrategy(
     {
@@ -59,7 +38,6 @@ passport.use(
       passwordField: "password",
     },
     (email, password, done) => {
-      // Authenticate user against your database
       knex("users")
         .where({ email: email })
         .first()
@@ -90,25 +68,6 @@ passport.use(
   )
 );
 
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await knex("users").where({ id: id }).first();
-
-    if (!user) {
-      return done(null, false);
-    }
-
-    return done(null, user);
-  } catch (err) {
-    return done(err);
-  }
-});
-
-// Import and mount your routes
 const genresRoutes = require("./routes/genresRoutes.js");
 const usersRoutes = require("./routes/usersRoutes.js");
 const promptsRoutes = require("./routes/promptsRoutes.js");
@@ -118,8 +77,6 @@ const authRoutes = require("./routes/authRoutes.js");
 const storyBranchRoutes = require("./routes/storyBranchRoutes.js");
 const storyTreeRoutes = require("./routes/storyTreeRoutes.js");
 
-
-
 app.use("/genres", genresRoutes);
 app.use("/users", usersRoutes);
 app.use("/prompts", promptsRoutes);
@@ -127,8 +84,6 @@ app.use("/emotions", emotionsRoutes);
 app.use("/feelings", feelingsRoutes);
 app.use("/storybranch", storyBranchRoutes);
 app.use("/storytree", storyTreeRoutes);
-
-// Authentication routes
 app.use("/auth", authRoutes);
 
 app.listen(PORT, () => {
