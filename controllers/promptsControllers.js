@@ -1,4 +1,5 @@
 const knex = require('../db/db');
+const { v4: uuidv4 } = require('uuid');
 
 exports.index = async (req, res) => {
   try {
@@ -26,8 +27,17 @@ exports.singlePrompt = async (req, res) => {
 
 exports.createPrompt = async (req, res) => {
   try {
-    await knex('prompts').insert(req.body);
-    res.status(201).json({ message: 'Prompt created successfully' });
+    if (!req.body.sentence) {
+      return res.status(400).json({ message: 'Sentence is required' });
+    }
+
+    const newPrompt = {
+      id: uuidv4(), 
+      sentence: req.body.sentence 
+    };
+
+    await knex('prompts').insert(newPrompt);
+    res.status(201).json({ message: 'Prompt created successfully', id: newPrompt.id });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });

@@ -1,18 +1,28 @@
+
 async function getProfile(req, res) {
-    try {
-      // Fetch the user's profile from the database using the user ID stored in req.userId
-      const user = await knex('users').where({ id: req.userId }).first();
-  
-      if (!user) {
-        return res.status(404).json({ message: 'User not found' });
-      }
-  
-      // Return the user's profile in the response
-      res.status(200).json({ user });
-    } catch (err) {
-      console.error('Profile retrieval error:', err);
-      res.status(500).json({ message: 'Error retrieving profile' });
-    }
+  try {
+    const { id, email, first_name, last_name, pen_first_name, pen_last_name, bio } = req.user;
+
+    const userProfile = {
+      id,
+      email,
+      first_name,
+      last_name,
+      pen_first_name,
+      pen_last_name,
+      bio
+    };
+
+    res.json({
+      message: 'You have access to this protected route!',
+      user: userProfile,
+    });
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    res.status(500).json({ message: 'Error fetching user profile.' });
   }
-  
-  module.exports = { getProfile };
+}
+
+module.exports = {
+  getProfile,
+}
