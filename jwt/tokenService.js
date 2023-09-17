@@ -22,7 +22,6 @@ const validateToken = (req, res, next) => {
             return res.status(401).json({ message: "Failed to authenticate token." });
         }
 
-        // Set the user object for the request
         req.user = { id: decoded.userId };
 
         next();

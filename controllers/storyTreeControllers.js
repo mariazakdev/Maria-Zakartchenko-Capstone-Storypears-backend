@@ -27,7 +27,7 @@ module.exports = {
                     });
     
                     if (branch_id) {
-                        await trx('storybranch').where({ id: branch_id }).del();  // Delete the branch
+                        await trx('storybranch').where({ id: branch_id }).del();  
                     }
     
                     res.status(201).send({ id: newStoryTreeId, message: 'Story tree created successfully' });

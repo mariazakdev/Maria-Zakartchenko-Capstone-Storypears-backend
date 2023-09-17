@@ -86,6 +86,12 @@ app.use("/storybranch", storyBranchRoutes);
 app.use("/storytree", storyTreeRoutes);
 app.use("/auth", authRoutes);
 
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send({ error: "Internal Server Error" });
+});
+
+
 app.listen(PORT, () => {
   console.log(`Listening at http://localhost:${PORT}`);
 });

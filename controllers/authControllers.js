@@ -92,6 +92,7 @@ exports.profile = async (req, res) => {
     }
 
     const userProfile = {
+      username:user.username,
       id: user.id,
       email: user.email,
       first_name: user.first_name,
